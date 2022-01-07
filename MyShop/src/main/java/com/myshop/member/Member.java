@@ -1,11 +1,11 @@
 package com.myshop.member;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Member {
 	private String member_id;
 	private String member_pwd;
-	private String member_nick;
+	private String member_nickname;
 	private String member_phone;
 	private String member_zipcode;
 	private String member_address1;
@@ -15,8 +15,8 @@ public class Member {
 	// default value 존재
 	private Date joinDate;
 	private int money;
-	private int mem_level;
-	private int pointer;
+	private int member_level;
+	private int point;
 	private int member_block;
 	private int member_type;
 
@@ -24,13 +24,13 @@ public class Member {
 		super();
 	}
 
-	public Member(String member_id, String member_pwd, String member_nick, String member_phone, String member_zipcode,
-			String member_address1, String member_address2, Date birty, Date joinDate, int money, int mem_level,
-			int pointer, int member_block, int member_type) {
+	public Member(String member_id, String member_pwd, String member_nickname, String member_phone,
+			String member_zipcode, String member_address1, String member_address2, Date birty, Date joinDate, int money,
+			int member_level, int point, int member_block, int member_type) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
-		this.member_nick = member_nick;
+		this.member_nickname = member_nickname;
 		this.member_phone = member_phone;
 		this.member_zipcode = member_zipcode;
 		this.member_address1 = member_address1;
@@ -38,8 +38,8 @@ public class Member {
 		this.birty = birty;
 		this.joinDate = joinDate;
 		this.money = money;
-		this.mem_level = mem_level;
-		this.pointer = pointer;
+		this.member_level = member_level;
+		this.point = point;
 		this.member_block = member_block;
 		this.member_type = member_type;
 	}
@@ -60,12 +60,12 @@ public class Member {
 		this.member_pwd = member_pwd;
 	}
 
-	public String getMember_nick() {
-		return member_nick;
+	public String getMember_nickname() {
+		return member_nickname;
 	}
 
-	public void setMember_nick(String member_nick) {
-		this.member_nick = member_nick;
+	public void setMember_nickname(String member_nickname) {
+		this.member_nickname = member_nickname;
 	}
 
 	public String getMember_phone() {
@@ -124,20 +124,20 @@ public class Member {
 		this.money = money;
 	}
 
-	public int getMem_level() {
-		return mem_level;
+	public int getMember_level() {
+		return member_level;
 	}
 
-	public void setMem_level(int mem_level) {
-		this.mem_level = mem_level;
+	public void setMember_level(int member_level) {
+		this.member_level = member_level;
 	}
 
-	public int getPointer() {
-		return pointer;
+	public int getPoint() {
+		return point;
 	}
 
-	public void setPointer(int pointer) {
-		this.pointer = pointer;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
 	public int getMember_block() {
@@ -158,10 +158,11 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_nick=" + member_nick
+		return "Member [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_nickname=" + member_nickname
 				+ ", member_phone=" + member_phone + ", member_zipcode=" + member_zipcode + ", member_address1="
 				+ member_address1 + ", member_address2=" + member_address2 + ", birty=" + birty + ", joinDate="
-				+ joinDate + ", money=" + money + ", mem_level=" + mem_level + ", pointer=" + pointer
+				+ joinDate + ", money=" + money + ", member_level=" + member_level + ", point=" + point
 				+ ", member_block=" + member_block + ", member_type=" + member_type + "]";
 	}
+
 }

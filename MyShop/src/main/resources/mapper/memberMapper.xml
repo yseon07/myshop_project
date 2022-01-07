@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.member.MemberMapper">
+	<resultMap id="member" type="com.myshop.member.Member">
+		<result property="member_id" column="member_id" />
+		<result property="member_pwd" column="member_pwd" />
+		<result property="member_ninkname" column="member_ninkname" />
+		<result property="member_phone" column="member_phone" />
+		<result property="member_zipcode" column="member_zipcode" />
+		<result property="member_address1" column="member_address1" />
+		<result property="member_address2" column="member_address2" />
+		<result property="birty" column="birty" />
+		<result property="joinDate" column="joinDate" />
+		<result property="money" column="money" />
+		<result property="member_level" column="member_level" />
+		<result property="point" column="point" />
+		<result property="member_block" column="member_block" />
+		<result property="member_type" column="member_type" />
+	</resultMap>
+
+	<insert id="insert" parameterType="member">
+		insert into values()
+	</insert>
+	<select id="select" resultType="member">
+		select * from my_member
+	</select>
+	<select id="selectById" parameterType="String"
+		resultType="member">
+		select * from my_member where member_id like #{member_id}
+	</select>
+	<select id="selectByNick" parameterType="String"
+		resultType="int">
+		select count(*) from my_member where member_nick like
+		#{member_nick}
+	</select>
+	<update id="update" parameterType="member">
+		update my_member set
+		member_zipcode = #{member_zipcode}, member_address1 =
+		#{member_address1}, member_address2 = #{member_address2}
+		where
+		member_id like #{member_id}
+	</update>
+	<update id="updatePwd" parameterType="member">
+		update my_member set
+		member_pwd = #{member_pwd} where member_id like #{member_id}
+	</update>
+	<update id="updateMoney" parameterType="member">
+		update my_member set
+		money = #{money} where member_id like #{member_id}
+	</update>
+	<update id="updateLevel" parameterType="member">
+		update my_member set
+		member_level = #{member_level} where member_id like #{member_id}
+	</update>
+	<update id="updatePoint" parameterType="member">
+		update my_member set
+		point = #{point} where member_id like #{member_id}
+	</update>
+	<update id="updateBlock" parameterType="member">
+		update my_member set
+		member_block = #{member_block} where member_id like #{member_id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from my_member where
+		member_id like #{member_id}
+	</delete>
+</mapper>

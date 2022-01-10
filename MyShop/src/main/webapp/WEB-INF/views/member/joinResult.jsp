@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="header.jsp" />
-<a href="${pageContext.request.contextPath }/member/mypage">내정보</a>
+	<script>
+		alert("회원가입을 축하드립니다.");
+		document.location.href = "${pageContext.request.contextPath}/";
+	</script>
 </body>
 </html>

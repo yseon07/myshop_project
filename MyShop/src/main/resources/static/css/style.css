@@ -4,15 +4,6 @@ html, body {
 	min-height: 100%
 }
 
-/* header page */
-.h-div {background-color: black ; color: white}
-/* .h-div { background-color: #D9E5FF } */
-.h-div > .row { margin: 0 ;}
-.h-div > .row > div { padding: 0 }
-.h-div > .row > .h-c2 { text-align: center }
-.h-div > .row > .h-c3 { text-align: right ; padding: 0px }
-
 /* login page*/
-.mainDiv { padding: 0 5% 0 5% ; margin-top: 15% }
 .id_search { color: gray }
 .jLink { text-align: right }

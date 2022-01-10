@@ -11,21 +11,19 @@
 		<result property="member_zipcode" column="member_zipcode" />
 		<result property="member_address1" column="member_address1" />
 		<result property="member_address2" column="member_address2" />
-		<result property="birty" column="birty" />
+		<result property="member_birty" column="member_birty" />
 		<result property="joinDate" column="joinDate" />
-		<result property="money" column="money" />
 		<result property="member_level" column="member_level" />
-		<result property="point" column="point" />
+		<result property="member_point" column="member_point" />
 		<result property="member_block" column="member_block" />
 		<result property="member_type" column="member_type" />
 	</resultMap>
 
 
 	<insert id="insert" parameterType="com.myshop.member.Member">
-		insert into my_member
-		values(#{member_id}, #{member_pwd}, #{member_nickname},
+		insert into my_member values(#{member_id}, #{member_pwd}, #{member_nickname},
 		#{member_phone}, #{member_zipcode}, #{member_address1},
-		#{member_address2}, #{birty})
+		#{member_address2}, #{member_birty}, sysdate, 1, 0, 0, 0)
 	</insert>
 	<select id="select" resultType="com.myshop.member.Member">
 		select * from my_member
@@ -36,8 +34,8 @@
 	</select>
 	<select id="selectByNick" parameterType="String"
 		resultType="int">
-		select count(*) from my_member where member_nick like
-		#{member_nick}
+		select count(*) from my_member where member_nickname like
+		#{member_nickname}
 	</select>
 	<update id="update" parameterType="com.myshop.member.Member">
 		update my_member set
@@ -50,17 +48,13 @@
 		update my_member set
 		member_pwd = #{member_pwd} where member_id like #{member_id}
 	</update>
-	<update id="updateMoney" parameterType="com.myshop.member.Member">
-		update my_member set
-		money = #{money} where member_id like #{member_id}
-	</update>
 	<update id="updateLevel" parameterType="com.myshop.member.Member">
 		update my_member set
 		member_level = #{member_level} where member_id like #{member_id}
 	</update>
 	<update id="updatePoint" parameterType="com.myshop.member.Member">
 		update my_member set
-		point = #{point} where member_id like #{member_id}
+		member_point = #{member_point} where member_id like #{member_id}
 	</update>
 	<update id="updateBlock" parameterType="com.myshop.member.Member">
 		update my_member set

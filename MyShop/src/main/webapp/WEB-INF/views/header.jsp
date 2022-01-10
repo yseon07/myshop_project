@@ -15,8 +15,32 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+<style>
+.h-div {
+	background-color: black;
+	color: white
+}
+/* .h-div { background-color: #D9E5FF } */
+.h-div>.row {
+	margin: 0;
+}
+
+.h-div>.row>div {
+	padding: 0
+}
+
+.h-div>.row>.h-c2 {
+	text-align: center
+}
+
+.h-div>.row>.h-c3 {
+	text-align: right;
+	padding: 0px
+}
+</style>
 </head>
 <body>
 	<div class="container-fluid h-div py-1 px-2 mb-3">
@@ -34,7 +58,21 @@
 							onclick="location.href='${pageContext.request.contextPath}/member/join'">회원가입</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="btn btn-sm btn-outline-dark"
+							${sessionScope.point }P / 
+						<c:choose>
+							<c:when test="${sessionScope.level == 1}">
+								<i class="bi bi-dice-1-fill mx-1"></i>일반 회원
+							</c:when>
+							<c:when test="${sessionScope.level == 2}">
+								<i class="bi bi-dice-2-fill"></i>정회원
+							</c:when>
+							<c:otherwise>
+								<i class="bi bi-dice-3-fill"></i>VIP
+							</c:otherwise>
+						</c:choose>
+						<%-- <button type="button" class="btn btn-sm btn-outline-light"
+							onclick="location.href='${pageContext.request.contextPath}/members/${id}'">내 정보</button> --%>
+						<button type="button" class="btn btn-sm btn-outline-light"
 							onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
 					</c:otherwise>
 				</c:choose>

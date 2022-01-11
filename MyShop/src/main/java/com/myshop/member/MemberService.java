@@ -25,6 +25,10 @@ public class MemberService {
 	public int getMemByNick(String member_nick) {
 		return mapper.selectByNick(member_nick);
 	};
+	
+	public String getMemByPhone(String member_phone) {
+		return mapper.selectByPhone(member_phone);
+	};
 
 	public void editMem(Member m) {
 		mapper.update(m);

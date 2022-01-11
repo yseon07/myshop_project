@@ -13,6 +13,8 @@ public interface MemberMapper {
 	Member selectById(String member_id);
 
 	int selectByNick(String nickname);
+	
+	String selectByPhone(String member_phone);
 
 	void update(Member m);
 

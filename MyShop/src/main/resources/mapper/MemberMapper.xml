@@ -23,7 +23,7 @@
 	<insert id="insert" parameterType="com.myshop.member.Member">
 		insert into my_member values(#{member_id}, #{member_pwd}, #{member_nickname},
 		#{member_phone}, #{member_zipcode}, #{member_address1},
-		#{member_address2}, #{member_birty}, sysdate, 1, 0, 0, 0)
+		#{member_address2}, #{member_birty}, sysdate, 1, 0, 0, 1)
 	</insert>
 	<select id="select" resultType="com.myshop.member.Member">
 		select * from my_member
@@ -36,6 +36,11 @@
 		resultType="int">
 		select count(*) from my_member where member_nickname like
 		#{member_nickname}
+	</select>
+	<select id="selectByPhone" parameterType="String"
+		resultType="String">
+		select member_id from my_member where member_phone like
+		#{member_phone}
 	</select>
 	<update id="update" parameterType="com.myshop.member.Member">
 		update my_member set

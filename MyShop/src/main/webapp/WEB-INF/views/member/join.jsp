@@ -180,7 +180,7 @@
 <body>
 	<c:import url="../header.jsp" />
 	<div class="mainDiv row align-items-center"
-		style="padding: 0 5% 0 5%; margin-top: 10%">
+		style="padding: 0 5% 0 5%; margin-top: 5%">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<form action="${pageContext.request.contextPath }/member/join"

@@ -8,12 +8,24 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <c:import url="../head.jsp"></c:import>
+<script>
+	$(document).ready(function() {
+		$("#searchA").click(function() {
+			searchPopup();
+		});
+	});
+
+	function searchPopup() {
+		var option = "width = 500, height = 500, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
+		window.open("/member/infoSearch", "내 정보 찾기", option);
+	}
+</script>
 </head>
 <body>
 	<c:import url="../header.jsp" />
 	<div class="mainDiv row" style="padding: 0 5% 0 5%; margin-top: 15%">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
 			<div class="loginDiv">
 				<form action="${pageContext.request.contextPath }/member/login"
 					method="post">
@@ -24,17 +36,18 @@
 					<button type="submit" class="btn btn-dark col-12">로그인</button>
 				</form>
 				<div class="id_search row justify-content-between">
-					<div class="col-6" style="display: inline">
-						<a class="text-reset text-decoration-none" href="#">아이디 찾기 &
-							비밀번호 찾기</a>
+					<div class="col-6" style="display: inline; text-align: left">
+						<a id="searchA" class="text-reset text-decoration-none"> Id &
+							Password 찾기</a>
 					</div>
 					<div class="jLink col-3">
-						<a class="text-reset text-decoration-none" href="#">회원가입</a>
+						<a class="text-reset text-decoration-none"
+							href="${pageContext.request.contextPath}/member/join">회원가입</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-4"></div>
 	</div>
 </body>
 </html>

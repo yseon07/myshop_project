@@ -58,20 +58,27 @@
 							onclick="location.href='${pageContext.request.contextPath}/member/join'">회원가입</button>
 					</c:when>
 					<c:otherwise>
-							${sessionScope.point }P / 
 						<c:choose>
-							<c:when test="${sessionScope.level == 1}">
-								<i class="bi bi-dice-1-fill mx-1"></i>일반 회원
-							</c:when>
-							<c:when test="${sessionScope.level == 2}">
-								<i class="bi bi-dice-2-fill"></i>정회원
+							<c:when test="${sessionScope.type == 0 }">
+								관리자
 							</c:when>
 							<c:otherwise>
-								<i class="bi bi-dice-3-fill"></i>VIP
+								${sessionScope.point }P /
+								<c:choose>
+									<c:when test="${sessionScope.level == 1}">
+										<i class="bi bi-dice-1-fill mx-1"></i>일반 회원
+									</c:when>
+									<c:when test="${sessionScope.level == 2}">
+										<i class="bi bi-dice-2-fill mx-1"></i>정회원
+									</c:when>
+									<c:otherwise>
+										<i class="bi bi-dice-3-fill mx-1"></i>VIP
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<%-- <button type="button" class="btn btn-sm btn-outline-light"
-							onclick="location.href='${pageContext.request.contextPath}/members/${id}'">내 정보</button> --%>
+						<button type="button" class="btn btn-sm btn-outline-light"
+							onclick="location.href='${pageContext.request.contextPath}/member/mypage'">내 정보</button> 
 						<button type="button" class="btn btn-sm btn-outline-light"
 							onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
 					</c:otherwise>

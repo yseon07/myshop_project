@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<c:import url="../head.jsp"></c:import>
 </head>
 <body>
-	<c:import url="header.jsp" />
-<a href="${pageContext.request.contextPath }/product/add">물건추가</a>
+
 </body>
 </html>

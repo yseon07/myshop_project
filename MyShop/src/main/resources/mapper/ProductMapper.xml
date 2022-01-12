@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.product.ProductMapper">
+	<resultMap id="product" type="com.myshop.product.Product">
+		<result property="num" column="num" />
+		<result property="product_title" column="product_title" />
+		<result property="product_price" column="product_price" />
+		<result property="product_quantity" column="product_quantity" />
+		<result property="product_image" column="product_image" />
+		<result property="cate1_num" column="cate1_num" />
+		<result property="cate2_num" column="cate2_num" />
+		<result property="discount" column="discount" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.myshop.product.Product">
+		insert into my_product
+		values(seq_my_pro.nextval, #{product_title}, #{product_price},
+		#{product_quantity}, #{product_image}, #{cate1_num}, #{cate2_num},
+		#{discount})
+	</insert>
+	<select id="select" resultType="com.myshop.product.Product">
+		select * from my_product
+	</select>
+	<select id="selectByNum" parameterType="int"
+		resultType="com.myshop.product.Product">
+		select * from my_product where num = #{num}
+	</select>
+	<update id="update" parameterType="com.myshop.product.Product">
+		update my_product set
+		product_title = #{product_title}, product_price = #{product_price},
+		product_quantity = #{product_quantity} where num = #{num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_product where
+		num = #{num}
+	</delete>
+</mapper>

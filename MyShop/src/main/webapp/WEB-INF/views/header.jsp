@@ -61,6 +61,8 @@
 						<c:choose>
 							<c:when test="${sessionScope.type == 0 }">
 								관리자
+								<button type="button" class="btn btn-sm btn-outline-light"
+									onclick="location.href='${pageContext.request.contextPath }/category/admin'">카테고리</button>
 							</c:when>
 							<c:otherwise>
 								${sessionScope.point }P /
@@ -78,7 +80,8 @@
 							</c:otherwise>
 						</c:choose>
 						<button type="button" class="btn btn-sm btn-outline-light"
-							onclick="location.href='${pageContext.request.contextPath}/member/mypage'">내 정보</button> 
+							onclick="location.href='${pageContext.request.contextPath}/member/mypage'">내
+							정보</button>
 						<button type="button" class="btn btn-sm btn-outline-light"
 							onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
 					</c:otherwise>

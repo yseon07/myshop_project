@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.category.CategoryMapper">
+	<resultMap id="category" type="com.myshop.category.Category">
+		<result property="cate_num" column="cate_num" />
+		<result property="cate_name" column="cate_name" />
+		<result property="top_cate_num" column="top_cate_num" />
+	</resultMap>
+
+	<insert id="insertCate1"
+		parameterType="com.myshop.category.Category">
+		insert into my_cate1 values(seq_my_cate1.nextval,
+		#{cate_name})
+	</insert>
+	<insert id="insertCate2"
+		parameterType="com.myshop.category.Category">
+		insert into my_cate2 values(seq_my_cate2.nextval,
+		#{cate_name}, #{top_cate_num})
+	</insert>
+	<select id="selectCate1"
+		resultType="com.myshop.category.Category">
+		select * from my_cate1 order by cate_num
+	</select>
+	<select id="selectCate2"
+		resultType="com.myshop.category.Category">
+		select * from my_cate2 order by cate_num
+	</select>
+	<select id="selectCate2ByNum" parameterType="int"
+		resultType="com.myshop.category.Category">
+		select * from my_cate2 where top_cate_num = #{top_cate_num}
+	</select>
+	<delete id="deleteCate1" parameterType="int">
+		delete from my_cate1
+		where cate_num = #{cate_num}
+	</delete>
+	<delete id="deleteCate2" parameterType="int">
+		delete from my_cate2
+		where cate_num = #{cate_num}
+	</delete>
+</mapper>

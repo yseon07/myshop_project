@@ -6,59 +6,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <c:import url="../head.jsp"></c:import>
-<script>
-	$(document).ready(function() {
-		$("#fileUpload").on("change", function() {
-			if ($("#fileUpload")[0].files.length > 5) {
-				alert("파일은 최대 5개까지만 올릴 수 있습니다.");
-				$("#productBtn").attr('disabled', true);
-			} else {
-				$("#productBtn").attr('disabled', false);
-			}
-		});
-	});
-</script>
+<script src="/resources/js/pAdd.js"></script>
 </head>
 <body>
 	<c:import url="../header.jsp" />
 	<div class="mainDiv row" style="padding: 0 5% 0 5%; margin-top: 5%">
 		<div class="col-3"></div>
 		<div class="col-6">
-			<form action="${pageContext.request.contextPath }/product/add"
+			<form id="pForm" action="${pageContext.request.contextPath }/product/add"
 				method="post" enctype="multipart/form-data"
 				onsubmit="return fileCheck()">
 				<table class="table">
 					<tr>
 						<td class="align-middle">제목</td>
-						<td><input type="text" id="product_title" required
+						<td><input type="text" name="product_title" placeholder="25글자 이내" required
 							class="form-control"></td>
 					</tr>
 					<tr>
 						<td class="align-middle">가격</td>
-						<td><input type="number" id="product_price" required
+						<td><input type="number" id="product_price" name="product_price" required
 							class="form-control"></td>
 					</tr>
 					<tr>
 						<td class="align-middle">재고</td>
-						<td><input type="number" id="product_quantity" required
+						<td><input type="number" id="product_quantity" name="product_quantity" required
 							class="form-control"></td>
 					</tr>
 					<tr>
 						<td class="align-middle">내용</td>
-						<td><textarea id="product_content" rows="10" required
+						<td><textarea name="product_content" rows="10" required
 								class="form-control" placeholder="1000자 이내"></textarea></td>
 					</tr>
 					<tr>
 						<!-- 최대 5개? -->
-						<td colspan="2" class="align-middle">이미지 <span style="font-size: 10px; color: gray;">(※첨부파일은
-								최대 5개까지 등록이 가능합니다.)</span><br>
-						<input type="file" multiple="multiple" id="fileUpload" name="files"></td>
+						<td colspan="2" class="align-middle">이미지 <span
+							style="font-size: 10px; color: gray;">(※첨부파일은 최대 5개까지 등록이
+								가능합니다.)</span><br> <input type="file" multiple="multiple"
+							id="fileUpload" name="file"></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="border-bottom-0"><button type="submit" id="productBtn"
-								class="btn btn-dark">등록</button></td>
+						<td><select id="cate1" class="form-select" name="cate1_num">
+						</select></td>
+						<td><select id="cate2" class="form-select" name="cate2_num">
+								<option>--선택--</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="border-bottom-0" style="text-align: right"><button type="submit"
+								id="productBtn" class="btn btn-dark">등록</button></td>
 					</tr>
 				</table>
 			</form>

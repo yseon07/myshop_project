@@ -6,20 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <c:import url="../head.jsp"></c:import>
-<script>
-	$(document).ready(function() {
-		$("#searchA").click(function() {
-			searchPopup();
-		});
-	});
-
-	function searchPopup() {
-		var option = "width = 500, height = 500, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
-		window.open("/member/infoSearch", "내 정보 찾기", option);
-	}
-</script>
+<script src="/resources/js/mLogin.js"></script>
 </head>
 <body>
 	<c:import url="../header.jsp" />

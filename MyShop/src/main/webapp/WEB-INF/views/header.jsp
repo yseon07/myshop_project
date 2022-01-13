@@ -50,7 +50,9 @@
 				<a class="text-reset text-decoration-none" href="/"><h4>MyShop</h4></a>
 			</div>
 			<div class="h-c3 col-sm-4">
-				<c:choose>
+			<button type="button" class="btn btn-sm btn-outline-light"
+						onclick="location.href='${pageContext.request.contextPath}/product/add'">제품 등록</button>
+				<c:choose>				
 					<c:when test="${sessionScope.id == null }">
 						<button type="button" class="btn btn-sm btn-outline-light"
 							onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인</button>

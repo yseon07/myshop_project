@@ -9,6 +9,6 @@
 </head>
 <body>
 	<c:import url="header.jsp" />
-<a href="${pageContext.request.contextPath }/product/add">물건추가</a>
+	<c:import url="${pageContext.request.contextPath }/product" />
 </body>
 </html>

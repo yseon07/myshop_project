@@ -17,6 +17,10 @@ public class ProductService {
 	public Product getProduct(int num) {
 		return mapper.selectByNum(num);
 	}
+	
+	public int getSequence() {
+		return mapper.selectSeq();
+	}
 
 	public void addProduct(Product p) {
 		mapper.insert(p);

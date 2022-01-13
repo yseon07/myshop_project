@@ -9,6 +9,7 @@ public interface ProductMapper {
 	void insert(Product p);
 	ArrayList<Product> select();
 	Product selectByNum(int num);
+	int selectSeq();
 	void update(Product p);
 	void delete(int num);
 }

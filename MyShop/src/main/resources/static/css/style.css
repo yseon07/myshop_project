@@ -5,9 +5,70 @@ html, body {
 }
 
 /* login page*/
-.id_search { color: gray }
-.jLink { text-align: right }
-#searchA { cursor: pointer }
+.id_search {
+	color: gray
+}
+
+.jLink {
+	text-align: right
+}
+
+#searchA {
+	cursor: pointer
+}
 
 /* mypage */
-.myTable { max-width: 700px ; text-align: left }
+.myTable {
+	max-width: 700px;
+	text-align: left
+}
+
+/* productList */
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center
+}
+
+li {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border: 0;
+	display: inline-block;
+}
+
+#imgMain {
+	margin: 10px auto;
+	position: relative;
+	border: 1px solid black;
+	cursor: pointer;
+}
+
+#imgMain img {
+	vertical-align: middle;
+}
+
+.likeList {
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	right: -5px;
+	opacity: 0.5;
+}
+
+.likeList:hover {
+	opacity: 1;
+}
+
+.circle {
+	display: inline-block;
+	border-radius: 50%;
+	background-color: rgba(128, 128, 128, 0.1);
+	width: 40px;
+	height: 40px;
+	padding-top: 5px;
+	cursor: pointer;
+	font-size: 20px;
+}

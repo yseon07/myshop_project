@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +45,13 @@ public class ProductController {
 		}
 
 		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@GetMapping("/product/{num}")
+	public ModelAndView productView(@PathVariable("num") int num) {
+		ModelAndView mv = new ModelAndView("/product/viewProduct");
+		mv.addObject("p", service.getProduct(num));
 		return mv;
 	}
 
@@ -79,17 +88,16 @@ public class ProductController {
 		p.setProduct_image("");
 		List<MultipartFile> fList = new ArrayList<MultipartFile>();
 
-		if (request.getFiles("file").get(0).getSize() != 0) {
-			fList = request.getFiles("file");
-		}
-
 		String path = request.getServletContext().getRealPath("\\resources\\image\\" + p.getNum());
 		File dir = new File(path);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 
-		fileUpload(path, fList);
+		if (request.getFiles("file").get(0).getSize() != 0) {
+			fList = request.getFiles("file");
+			fileUpload(path, fList);
+		}
 
 		p.setProduct_image("\\resources\\image\\" + p.getNum());
 		p.setDiscount(0);
@@ -101,7 +109,8 @@ public class ProductController {
 	// 파일 업로드
 	public void fileUpload(String path, List<MultipartFile> list) {
 		for (MultipartFile m : list) {
-			String originFileName = m.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			String originFileName = uuid.toString() + "_" + m.getOriginalFilename();
 			String file1 = path + "\\" + originFileName;
 			try {
 				m.transferTo(new File(file1));

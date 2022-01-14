@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.like.LikeMapper">
+	<resultMap id="like" type="com.myshop.like.Like">
+		<result property="num" column="num"></result>
+		<result property="p_num" column="p_num"></result>
+		<result property="mem_id" column="mem_id"></result>
+	</resultMap>
+
+	<insert id="insert" parameterType="com.myshop.like.Like">
+		insert into my_like values(seq_my_like.nextval, #{p_num}, #{mem_id})
+	</insert>
+	<select id="selectById" parameterType="com.myshop.like.Like" resultType="int">
+		select count(*) from my_like where p_num = #{p_num} and mem_id = #{mem_id}
+	</select>
+	<select id="selectCount" parameterType="int" resultType="int">
+		select count(*) from my_like where p_num = #{p_num}
+	</select>
+	<delete id="delete" parameterType="com.myshop.like.Like">
+		delete from my_like where p_num = #{p_num} and mem_id = #{mem_id}
+	</delete>
+</mapper>

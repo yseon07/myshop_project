@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.notice.NoticeMapper">
+	<resultMap id="notice" type="com.myshop.notice.Notice">
+		<result property="num" column="num" />
+		<result property="notice_title" column="notice_title" />
+		<result property="notice_content" column="notice_content" />
+		<result property="write_date" column="write_date" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.myshop.notice.Notice">
+		insert into my_notice values(seq_my_notice.nextval, #{notice_title}, #{notice_content}, sysdate)
+	</insert>
+	<select id="select" resultType="com.myshop.notice.Notice">
+		select * from my_notice order by num desc
+	</select>
+	<select id="selectByNum" parameterType="int"
+		resultType="com.myshop.notice.Notice">
+		select * from my_notice where num = #{num}
+	</select>
+	<update id="update" parameterType="com.myshop.notice.Notice">
+		update my_notice set notice_title = #{notice_title}, notice_content =
+		#{notice_content} where num = #{num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_notice where num =
+		#{num}
+	</delete>
+</mapper>

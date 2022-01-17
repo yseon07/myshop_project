@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.qna.QnaMapper">
+	<resultMap id="qna" type="com.myshop.qna.Qna">
+		<result property="num" column="num" />
+		<result property="p_num" column="p_num" />
+		<result property="mem_id" column="mem_id" />
+		<result property="qna_type" column="qna_type" />
+		<result property="content" column="content" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.myshop.qna.Qna">
+		insert into my_qna values(seq_my_qna.nextval, #{p_num}, #{mem_id}, #{qna_type}, #{top_question}, #{content})
+	</insert>
+	<select id="selectByNum" parameterType="int"
+		resultType="com.myshop.qna.Qna">
+		select * from my_qna where p_num = #{p_num}
+	</select>
+	<update id="update" parameterType="com.myshop.qna.Qna">
+		update my_qna set content = #{content} where num = #{num} 
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_qna where num = #{num}
+	</delete>
+</mapper>

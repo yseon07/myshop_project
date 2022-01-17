@@ -47,11 +47,22 @@ public class ProductController {
 		mv.addObject("list", list);
 		return mv;
 	}
-	
+
 	@GetMapping("/product/{num}")
-	public ModelAndView productView(@PathVariable("num") int num) {
+	public ModelAndView productView(@PathVariable("num") int num, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/product/viewProduct");
-		mv.addObject("p", service.getProduct(num));
+
+		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
+		Product p = service.getProduct(num);
+		String path1 = path + p.getNum() + "\\";
+		File imgDir = new File(path1);
+		if (imgDir.exists()) {
+			String[] files = imgDir.list();
+			for (int j = 0; j < files.length; j++) {
+				p.setFiles(files);
+			}
+		}
+		mv.addObject("p", p);
 		return mv;
 	}
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.order.OrderListMapper">
+	<resultMap id="orderlist" type="com.myshop.order.OrderList">
+		<result property="num" column="num" />
+		<result property="p_num" column="p_num" />
+		<result property="mem_id" column="mem_id" />
+		<result property="quantity" column="quantity" />
+		<result property="price" column="price" />
+		<result property="order_date" column="order_date" />
+		<result property="mem_code" column="mem_code" />
+		<result property="send_address" column="send_address" />
+		<result property="send_memo" column="send_memo" />
+		<result property="mem_point" column="mem_point" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.myshop.order.OrderList">
+		insert into my_order_list
+		values(seq_my_order_list.nextval, #{p_num}, #{mem_id}, #{quantity},
+		#{price}, sysdate, #{mem_code}, #{send_address}, #{send_memo},
+		#{mem_point})
+	</insert>
+	<select id="select" resultType="com.myshop.order.OrderList">
+		select * from my_order_list order
+		by num
+	</select>
+	<select id="selectById" parameterType="String"
+		resultType="com.myshop.order.OrderList">
+		select * from my_order_list where mem_id = #{mem_id} order
+		by num
+	</select>
+	<update id="update" parameterType="com.myshop.order.OrderList">
+		update my_order_list set
+		quantity = #{quantity}, price = #{price}, mem_code = #{mem_code},
+		#{send_address}, #{send_memo}, #{mem_point} where num = #{num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_order_list
+		where num = #{num}
+	</delete>
+</mapper>

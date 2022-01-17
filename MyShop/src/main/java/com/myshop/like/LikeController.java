@@ -13,37 +13,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LikeController {
 	@Autowired
 	private LikeService service;
-	
+
 	@GetMapping("/{pNum}")
 	@ResponseBody
-	public int getProductLikeCount(@RequestParam(value="p_num") int pNum) {
+	public int getProductLikeCount(@RequestParam(value = "p_num") int pNum) {
 		return service.getCount(pNum);
 	}
-	
-	@GetMapping("/{memId}/{pNum}")
+
+	@PostMapping("/{pNum}/mem")
 	@ResponseBody
-	public int getProductLike(@RequestParam(value="p_num") int pNum, @RequestParam(value="mem_id") String memId) {
+	public int getProductLike(@RequestParam(value = "p_num") int pNum, @RequestParam(value = "mem_id") String memId) {
 		Like l = new Like();
 		l.setP_num(pNum);
 		l.setMem_id(memId);
 		return service.getLike(l); // 1이면 존재, 0이면 없음
 	}
-	
-	@PostMapping("/{memId}/{pNum}")
+
+	@PostMapping("/{pNum}")
 	@ResponseBody
-	public void setLike(@RequestParam(value="p_num") int pNum, @RequestParam(value="mem_id") String memId) {
+	public int setLike(@RequestParam(value = "p_num") int pNum, @RequestParam(value = "mem_id") String memId) {
 		Like l = new Like();
 		l.setP_num(pNum);
 		l.setMem_id(memId);
-		service.addLike(l);
+		if (service.getLike(l) == 1) {
+			service.delLike(l);
+			return 0;
+		} else {
+			service.addLike(l);
+			return 1;
+		}
 	}
-	
-	@PostMapping("/del")
-	@ResponseBody
-	public void delLike(@RequestParam(value="p_num") int pNum, @RequestParam(value="mem_id") String memId) {
-		Like l = new Like();
-		l.setP_num(pNum);
-		l.setMem_id(memId);
-		service.delLike(l);
-	}
+
+	/*
+	 * @PostMapping("/{pNum}/del")
+	 * 
+	 * @ResponseBody public void delLike(@RequestParam(value = "p_num") int
+	 * pNum, @RequestParam(value = "mem_id") String memId) { Like l = new Like();
+	 * l.setP_num(pNum); l.setMem_id(memId); service.delLike(l); }
+	 */
 }

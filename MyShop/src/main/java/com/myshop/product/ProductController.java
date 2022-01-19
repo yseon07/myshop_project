@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,14 +24,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myshop.like.Like;
+import com.myshop.like.LikeService;
+import com.myshop.review.ReviewService;
+
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService service;
+	@Autowired
+	private ReviewService rService;
+	@Autowired
+	private LikeService lService;
 
 	@GetMapping("/product")
 	public ModelAndView allList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/product/productList");
+		HttpSession session = request.getSession(false);
 		ArrayList<Product> list = service.getAll();
 		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
 		for (int i = 0; i < list.size(); i++) {
@@ -41,6 +51,13 @@ public class ProductController {
 				for (int j = 0; j < files.length; j++) {
 					list.get(i).setFiles(files);
 				}
+			}
+			list.get(i).setReviewCount(rService.getProductReview(list.get(i).getNum()).size());
+			if (session.getAttribute("id") != null && !((String) session.getAttribute("id")).equals("")) {
+				Like l = new Like();
+				l.setMem_id((String) session.getAttribute("id"));
+				l.setP_num(list.get(i).getNum());
+				list.get(i).setLikeCheck(lService.getLike(l));
 			}
 		}
 

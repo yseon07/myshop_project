@@ -9,16 +9,17 @@
 		<result property="mem_id" column="mem_id" />
 		<result property="star" column="star" />
 		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
 	</resultMap>
 
 	<insert id="insert" parameterType="com.myshop.review.Review">
 		insert into my_review
 		values(seq_my_review.nextval, #{p_num}, #{mem_id}, #{star},
-		#{content})
+		#{content}, sysdate)
 	</insert>
 	<select id="selectByNum" parameterType="int"
 		resultType="com.myshop.review.Review">
-		select * from my_review where p_num = #{p_num} order by num desc
+		select * from my_review where p_num = #{p_num} order by writeDate desc
 	</select>
 	<update id="update" parameterType="com.myshop.review.Review">
 		update my_review set content = #{content} where num = #{num}

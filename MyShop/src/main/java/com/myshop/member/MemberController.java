@@ -35,6 +35,7 @@ public class MemberController {
 		if (m1 != null && m1.getMember_pwd().equals(pwd)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
+			session.setAttribute("nick", m1.getMember_nickname());
 			session.setAttribute("level", m1.getMember_level());
 			session.setAttribute("point", m1.getMember_point());
 			session.setAttribute("type", m1.getMember_type());

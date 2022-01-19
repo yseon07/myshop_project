@@ -72,3 +72,8 @@ li {
 	cursor: pointer;
 	font-size: 20px;
 }
+
+/* product view */
+.imgListTd {
+	cursor: pointer
+}

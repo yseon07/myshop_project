@@ -43,16 +43,14 @@
 </style>
 </head>
 <body>
-	<div class="container-fluid h-div py-1 px-2 mb-3">
+	<div class="w-100 container-fluid h-div py-1 px-2 mb-3">
 		<div class="row w-100 align-items-center">
 			<div class="h-c1 col-sm-4"></div>
 			<div class="h-c2 col-sm-4">
 				<a class="text-reset text-decoration-none" href="/"><h4>MyShop</h4></a>
 			</div>
 			<div class="h-c3 col-sm-4">
-			<button type="button" class="btn btn-sm btn-outline-light"
-						onclick="location.href='${pageContext.request.contextPath}/product/add'">제품 등록</button>
-				<c:choose>				
+				<c:choose>
 					<c:when test="${sessionScope.id == null }">
 						<button type="button" class="btn btn-sm btn-outline-light"
 							onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인</button>
@@ -65,6 +63,9 @@
 								관리자
 								<button type="button" class="btn btn-sm btn-outline-light"
 									onclick="location.href='${pageContext.request.contextPath }/category/admin'">카테고리</button>
+								<button type="button" class="btn btn-sm btn-outline-light"
+									onclick="location.href='${pageContext.request.contextPath}/product/add'">제품
+									등록</button>
 							</c:when>
 							<c:otherwise>
 								${sessionScope.point }P /

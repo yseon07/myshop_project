@@ -1,5 +1,7 @@
 package com.myshop.qna;
 
+import java.util.Date;
+
 public class Qna {
 	private int num;
 	private int p_num;
@@ -7,12 +9,13 @@ public class Qna {
 	private int qna_type;
 	private int top_question;
 	private String content;
+	private Date writeDate;
 
 	public Qna() {
 		super();
 	}
 
-	public Qna(int num, int p_num, String mem_id, int qna_type, int top_question, String content) {
+	public Qna(int num, int p_num, String mem_id, int qna_type, int top_question, String content, Date writeDate) {
 		super();
 		this.num = num;
 		this.p_num = p_num;
@@ -20,6 +23,7 @@ public class Qna {
 		this.qna_type = qna_type;
 		this.top_question = top_question;
 		this.content = content;
+		this.writeDate = writeDate;
 	}
 
 	public int getNum() {
@@ -68,6 +72,14 @@ public class Qna {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Date getWriteDate() {
+		return writeDate;
+	}
+
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
 	}
 
 	@Override

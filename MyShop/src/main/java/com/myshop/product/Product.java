@@ -18,13 +18,16 @@ public class Product {
 	private Category category1, category2;
 	private int discount;
 	private String[] files;
+	private int reviewCount;
+	private int likeCheck;
 
 	public Product() {
 		super();
 	}
 
 	public Product(int num, String product_title, int product_price, int product_quantity, String product_content,
-			String product_image, int cate1_num, int cate2_num, Category category1, Category category2, int discount) {
+			String product_image, int cate1_num, int cate2_num, Category category1, Category category2, int discount,
+			int reviewCount, int likeCheck) {
 		super();
 		this.num = num;
 		this.product_title = product_title;
@@ -37,6 +40,8 @@ public class Product {
 		this.category1 = category1;
 		this.category2 = category2;
 		this.discount = discount;
+		this.reviewCount = reviewCount;
+		this.likeCheck = likeCheck;
 	}
 
 	public Product(int num, String product_title, int product_price, int product_quantity, String product_content,
@@ -153,12 +158,28 @@ public class Product {
 		this.files = files;
 	}
 
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public int getLikeCheck() {
+		return likeCheck;
+	}
+
+	public void setLikeCheck(int likeCheck) {
+		this.likeCheck = likeCheck;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [num=" + num + ", product_title=" + product_title + ", product_price=" + product_price
 				+ ", product_quantity=" + product_quantity + ", product_content=" + product_content + ", product_image="
 				+ product_image + ", cate1_num=" + cate1_num + ", cate2_num=" + cate2_num + ", category1=" + category1
-				+ ", category2=" + category2 + ", discount=" + discount + ", files=" + Arrays.toString(files) + "]";
+				+ ", category2=" + category2 + ", discount=" + discount + ", files=" + Arrays.toString(files)
+				+ ", reviewCount=" + reviewCount + ", likeCheck=" + likeCheck + "]";
 	}
-
 }

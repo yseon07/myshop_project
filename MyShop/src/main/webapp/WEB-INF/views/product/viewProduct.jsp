@@ -50,6 +50,7 @@ function loginCheck() {
 						});
 				
 				$("#pLike").click(function() {
+					if(loginCheck()) {
 						$.ajax({
 							url: "/like/${p.num}",
 							data: {mem_id: id, p_num: ${p.num} },
@@ -64,14 +65,41 @@ function loginCheck() {
 								}
 							}
 						});
+					} else {
+						var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
+						if(an == true) {
+							location.href="/member/login";
+						}
+					}
 				});
+				
+				$("#myTab a").click(function(e) {
+					e.preventDefault();
+					$(this).tab("show");
+				});
+				
+				/* $("#reviewWrite").click(function() {
+					if(loginCheck()) {
+						var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
+						window.open("/review/add?pNum=${p.num}", "비밀번호 변경", option);
+					} else {
+						alert("로그인 후 작성 가능 합니다.");
+					}
+				}); */
+				
+				 $("#qBtn").click(function() {
+				if(loginCheck()) {
+					var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
+					window.open("/qna/add?p_num=${p.num}", "질문 등록", option);
+				} else {
+					var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
+					if(an == true) {
+						location.href="/member/login";
+					}
+				}
+			}); 
 			});
 </script>
-<style>
-.imgListTd {
-	cursor: pointer
-}
-</style>
 </head>
 <body>
 	<c:import url="../header.jsp" />
@@ -140,7 +168,9 @@ function loginCheck() {
 							<i id="vpBtn1" class="mx-1 bi bi-gift"></i>찜하기
 						</button>
 						<button type="button" style="width: 49%"
-							class="btn btn-outline-dark my-2"><i id="vpBtn2" class="mx-1 bi bi-cart-plus"></i>장바구니</button>
+							class="btn btn-outline-dark my-2">
+							<i id="vpBtn2" class="mx-1 bi bi-cart-plus"></i>장바구니
+						</button>
 					</div>
 				</div>
 			</div>
@@ -149,7 +179,24 @@ function loginCheck() {
 	</div>
 	<div class="mainDiv row" id="reviewDiv" style="padding: 0 5% 0 5%">
 		<div class="col-2"></div>
-		<div class="col-8">리뷰</div>
+		<div class="col-8 my-2">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li role="presentation" style="width: 50%" class="nav-item"><a
+					class="nav-link active" id="home-tab" data-toggle="tab" href="#r1">리뷰</a></li>
+				<li role="presentation" style="width: 50%" class="nav-item"><a
+					class="nav-link" id="profile-tab" data-toggle="tab" href="#q1">QnA</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="r1" role="tabpanel"
+					aria-labelledby="home-tab">
+					<c:import url="/review/list?p_num=${p.num }"></c:import>
+				</div>
+				<div class="tab-pane fade" id="q1" role="tabpanel">
+					<!-- <button type="button" id="qBtn" class="btn btn-dark">질문</button> -->
+					<c:import url="/qna/list?p_num=${p.num }"></c:import>
+				</div>
+			</div>
+		</div>
 		<div class="col-2"></div>
 	</div>
 </body>

@@ -9,10 +9,11 @@
 		<result property="mem_id" column="mem_id" />
 		<result property="qna_type" column="qna_type" />
 		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="com.myshop.qna.Qna">
-		insert into my_qna values(seq_my_qna.nextval, #{p_num}, #{mem_id}, #{qna_type}, #{top_question}, #{content})
+		insert into my_qna values(seq_my_qna.nextval, #{p_num}, #{mem_id}, #{qna_type}, #{top_question}, #{content}, sysdate)
 	</insert>
 	<select id="selectByNum" parameterType="int"
 		resultType="com.myshop.qna.Qna">

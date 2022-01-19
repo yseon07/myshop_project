@@ -11,6 +11,42 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="/resources/js/pList.js"></script>
+<script>
+$(function() {
+	$(".circle").click(function() {
+		if ($(this).attr("id") == "cBtn") {
+			$(this).children("i").removeClass("bi-cart-plus");
+			$(this).children("i").addClass("bi-cart-plus-fill");
+		} else {	
+			var id = '${sessionScope.id}';
+			var num = $(this).attr('data-num');
+			var ob = $(this).children("i");
+			if(id != null && id != "") {
+				$.ajax({
+					url: "/like/" + num,
+					data: { p_num: num, mem_id: id },
+					method: 'post',
+					success: function(data){
+						if(data == 1) {
+							ob.removeClass("bi-heart");
+							ob.addClass("bi-heart-fill");
+						} else {
+							ob.removeClass("bi-heart-fill");
+							ob.addClass("bi-heart");
+						}
+					}
+				});
+			} else {
+				var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
+				if(an == true) {
+					location.href="/member/login";
+				}
+			}
+		}
+		event.stopPropagation();
+	});
+});
+</script>
 </head>
 <body>
 	<div class="mainDiv row align-items-center justify-content-center"
@@ -39,8 +75,13 @@
 										<div id="cBtn" class="circle">
 											<i class="bi bi-cart-plus"></i>
 										</div>
-										<div id="lBtn" class="circle">
-											<i class="bi bi-heart"></i>
+										<div id="lBtn" class="circle" data-num="${p.num }">
+											<c:if test="${p.likeCheck == 0 }">
+												<i class="bi bi-heart"></i>
+											</c:if>
+											<c:if test="${p.likeCheck == 1 }">
+												<i class="bi bi-heart-fill"></i>
+											</c:if>
 										</div>
 									</div>
 									<%-- <c:forEach items="${p.files }" var="f"> 이미지 전체 출력
@@ -55,7 +96,7 @@
 									<c:if test="${p.discount != 0 }">
 										<b>${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}</b>원
 									</c:if>
-									<br> ${p.product_title }<br> 리뷰 0개
+									<br> ${p.product_title }<br> 리뷰 ${p.reviewCount}개
 								</div>
 							</li>
 						</c:forEach>

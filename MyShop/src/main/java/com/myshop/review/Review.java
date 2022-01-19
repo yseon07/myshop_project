@@ -1,23 +1,27 @@
 package com.myshop.review;
 
+import java.util.Date;
+
 public class Review {
 	private int num;
 	private int p_num;
 	private String mem_id;
 	private int star;
 	private String content;
+	private Date writeDate;
 
 	public Review() {
 		super();
 	}
 
-	public Review(int num, int p_num, String mem_id, int star, String content) {
+	public Review(int num, int p_num, String mem_id, int star, String content, Date writeDate) {
 		super();
 		this.num = num;
 		this.p_num = p_num;
 		this.mem_id = mem_id;
 		this.star = star;
 		this.content = content;
+		this.writeDate = writeDate;
 	}
 
 	public int getNum() {
@@ -60,9 +64,17 @@ public class Review {
 		this.content = content;
 	}
 
+	public Date getWriteDate() {
+		return writeDate;
+	}
+
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [num=" + num + ", p_num=" + p_num + ", mem_id=" + mem_id + ", star=" + star + ", content="
-				+ content + "]";
+				+ content + ", writeDate=" + writeDate + "]";
 	}
 }

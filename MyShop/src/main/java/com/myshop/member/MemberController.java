@@ -173,8 +173,6 @@ public class MemberController {
 		return mv;
 	}
 
-	@GetMapping("/members/{id}")
-	public void editMembers(String id) {
-
-	}
+	
+	
 }

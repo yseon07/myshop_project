@@ -40,6 +40,8 @@
 	text-align: right;
 	padding: 0px
 }
+
+#drMenu { cursor: pointer ; }
 </style>
 </head>
 <body>
@@ -68,6 +70,7 @@
 									등록</button>
 							</c:when>
 							<c:otherwise>
+								<i class="bi bi-cart-check-fill"></i>
 								${sessionScope.point }P /
 								<c:choose>
 									<c:when test="${sessionScope.level == 1}">
@@ -82,11 +85,17 @@
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<button type="button" class="btn btn-sm btn-outline-light"
-							onclick="location.href='${pageContext.request.contextPath}/member/mypage'">내
-							정보</button>
-						<button type="button" class="btn btn-sm btn-outline-light"
-							onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
+							<a style="color: white" class="dropdown-toggle" id="drMenu"
+								data-bs-toggle="dropdown">${sessionScope.nick }님</a>
+							<ul class="dropdown-menu" aria-labelledby="drMenu">
+								<li><button type="button"
+										class="btn btn-sm btn-outline-black"
+										onclick="location.href='${pageContext.request.contextPath}/member/mypage'">내
+										정보</button></li>
+								<li><button type="button"
+										class="btn btn-sm btn-outline-black"
+										onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button></li>
+							</ul>
 					</c:otherwise>
 				</c:choose>
 			</div>

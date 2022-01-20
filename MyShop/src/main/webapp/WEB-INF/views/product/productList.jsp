@@ -55,7 +55,7 @@ $(function() {
 		<div class="col-8 justify-content-center text-center">
 			<c:choose>
 				<c:when test="${not empty list }">
-					<ul>
+					<ul id="ul1">
 						<c:forEach var="p" items="${list }">
 							<%-- <c:set var="i" value="0" />
 							<c:set var="j" value="5" /> --%>

@@ -39,9 +39,11 @@
 </head>
 <body>
 	<div class="container-fluid h-div py-1 px-2 mb-3">
-		<div class="row w-100 align-items-center">
-			<div class="h-c2 col-sm-4">
-				<h4>MyShop</h4>
+		<div class="w-100 align-items-center">
+			<div class="row">
+				<div class="h-c2 col-sm-4">
+					<h4>MyShop</h4>
+				</div>
 			</div>
 		</div>
 	</div>

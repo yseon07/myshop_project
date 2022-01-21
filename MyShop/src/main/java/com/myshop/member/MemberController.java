@@ -114,7 +114,7 @@ public class MemberController {
 	@ResponseBody
 	public String pwdSearch(@RequestParam String member_id, @RequestParam String member_phone) {
 		Member m = service.getMemById(member_id);
-		if(m.getMember_phone().equals(member_phone)) {
+		if(m != null && m.getMember_phone().equals(member_phone)) {
 			return m.getMember_pwd();
 		}
 		return null;

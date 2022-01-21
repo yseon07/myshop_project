@@ -7,50 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../head.jsp"></c:import>
-<script>
-	$(document).ready(function() {
-		$("#idSearchBtn").click(function() {
-			var i = $("#si1").val();
-			$.get('/member/idSearch', {
-				member_phone : i
-			}, function(data) {
-				alert("회원님의 아이디는 " + data + " 입니다.");
-			});
-		});
-
-		$("#pwdSearchBtn").click(function() {
-			var p1 = $("#sp1").val();
-			var p2 = $("#sp2").val();
-			$.post('/member/pwdSearch', {
-				member_id : p1,
-				member_phone : p2
-			}, function(data) {
-				alert("회원님의 비밀번호는 " + data + " 입니다.");
-			}); // 이메일로 임시 번호 발급(나중에 구현)
-		});
-	});
-</script>
+<script src="/resources/js/mSearch.js"></script>
 <style>
 .h-div {
 	background-color: black;
 	color: white
 }
-/* .h-div { background-color: #D9E5FF } */
 .h-div>.row {
 	margin: 0;
 }
 
 .h-div>.row>div {
 	padding: 0
-}
-
-.h-div>.row>.h-c2 {
-	text-align: center
-}
-
-.h-div>.row>.h-c3 {
-	text-align: right;
-	padding: 0px
 }
 
 .infoSearchInput {
@@ -61,8 +29,8 @@
 </head>
 <body>
 	<div class="container-fluid h-div py-1 px-2 mb-3">
-		<div class="row w-100 align-items-center">
-			<div class="h-c2 col-sm-4">
+		<div class="w-100 align-items-center">
+			<div class="h-c2 col-sm-12" style="text-align: center">
 				<h4>MyShop</h4>
 			</div>
 		</div>

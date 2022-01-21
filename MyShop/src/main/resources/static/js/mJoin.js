@@ -38,127 +38,103 @@ function allCheck() {
 	}
 }
 
-$(document)
-	.ready(
-		function() {
-			$("#member_id")
-				.change(
-					function() {
-						var value = $(this).val();
-						var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-						if (!regExp.test(value)) {
-							$("#member_id").addClass(
-								"is-invalid");
-							$("#member_id").removeClass(
-								"is-valid");
-							cId = false;
-						} else {
-							$("#member_id").removeClass(
-								"is-invalid");
-
-							$
-								.ajax({
-									url: '/member/idCheck',
-									type: 'post',
-									data: {
-										member_id: value
-									},
-									success: function(
-										data) {
-										if (data == 1) {
-											$(
-												"#member_id")
-												.addClass(
-													"is-valid");
-											$(
-												"#member_id")
-												.removeClass(
-													"is-invalid");
-											cId = true;
-										} else {
-											$(
-												"#member_id")
-												.addClass(
-													"is-invalid");
-											$(
-												"#member_id")
-												.removeClass(
-													"is-valid");
-											cId = false;
-										}
-									}
-								});
-						}
-					});
-
-			$("#member_pwd, #member_pwd2").change(function() {
-				var p1 = $("#member_pwd").val();
-				var p2 = $("#member_pwd2").val();
-
-				if (p1 != p2) {
-					$("#member_pwd").addClass("is-invalid");
-					$("#member_pwd2").addClass("is-invalid");
-					$("#member_pwd2").focus();
-					cPwd = false;
-				} else {
-					$("#member_pwd").removeClass("is-invalid");
-					$("#member_pwd2").removeClass("is-invalid");
-					cPwd = true;
+$(function() {
+	$("#member_id").change(function() {
+		var value = $(this).val();
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		if (!regExp.test(value)) {
+			$("#member_id").addClass("is-invalid");
+			$("#member_id").removeClass("is-valid");
+			cId = false;
+		} else {
+			$("#member_id").removeClass("is-invalid");
+			$.ajax({
+				url: '/member/idCheck',
+				type: 'post',
+				data: {
+					member_id: value
+				},
+				success: function(data) {
+					if (data == 1) {
+						$("#member_id").addClass("is-valid");
+						$("#member_id").removeClass("is-invalid");
+						cId = true;
+					} else {
+						$("#member_id").addClass("is-invalid");
+						$("#member_id").removeClass("is-valid");
+						cId = false;
+					}
 				}
 			});
+		}
+	});
 
-			$("#member_phone")
-				.change(
-					function() {
-						var value = $(this).val();
-						var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+	$("#member_pwd, #member_pwd2").change(function() {
+		var p1 = $("#member_pwd").val();
+		var p2 = $("#member_pwd2").val();
 
-						if (!regExp.test(value)) {
-							$("#member_phone").addClass(
-								"is-invalid");
-							cTel = false;
-						} else {
-							$("#member_phone").removeClass(
-								"is-invalid");
-							cTel = true;
-						}
-					});
+		if (p1 != p2) {
+			$("#member_pwd").addClass("is-invalid");
+			$("#member_pwd2").addClass("is-invalid");
+			$("#member_pwd2").focus();
+			cPwd = false;
+		} else {
+			$("#member_pwd").removeClass("is-invalid");
+			$("#member_pwd2").removeClass("is-invalid");
+			cPwd = true;
+		}
+	});
 
-			$("#member_nick").change(
-				function() {
-					var nickName = $(this).val();
+	$("#member_phone").change(function() {
+		var value = $(this).val();
+		var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 
-					$.ajax({
-						url: '/member/nickCheck',
-						type: 'post',
-						data: {
-							nickname: nickName
-						},
-						success: function(data) {
-							if (data == 0) {
-								$("#member_nick").addClass(
-									"is-valid");
-								$("#member_nick").removeClass(
-									"is-invalid");
-								cNick = true;
-							} else {
-								$("#member_nick").addClass(
-									"is-invalid");
-								$("#member_nick").removeClass(
-									"is-valid");
-								cTel = false;
-							}
-						}
-					});
-				});
+		if (!regExp.test(value)) {
+			$("#member_phone").addClass(
+				"is-invalid");
+			cTel = false;
+		} else {
+			$("#member_phone").removeClass(
+				"is-invalid");
+			cTel = true;
+		}
+	});
 
-			$("select").change(function() {
-				var b1 = $("#birty1 option:selected").val();
-				var b2 = $("#birty2 option:selected").val();
-				if (b1 >= 1 && b2 >= 1) {
-					cBirty = true;
-				} else {
-					cBirty = false;
+	$("#member_nick").change(
+		function() {
+			var nickName = $(this).val();
+
+			$.ajax({
+				url: '/member/nickCheck',
+				type: 'post',
+				data: {
+					nickname: nickName
+				},
+				success: function(data) {
+					if (data == 0) {
+						$("#member_nick").addClass(
+							"is-valid");
+						$("#member_nick").removeClass(
+							"is-invalid");
+						cNick = true;
+					} else {
+						$("#member_nick").addClass(
+							"is-invalid");
+						$("#member_nick").removeClass(
+							"is-valid");
+						cTel = false;
+					}
 				}
 			});
 		});
+
+	$("select").change(function() {
+		var b1 = $("#birty1 option:selected").val();
+		var b2 = $("#birty2 option:selected").val();
+		if (b1 >= 1 && b2 >= 1) {
+			cBirty = true;
+		} else {
+			cBirty = false;
+		}
+	});
+});

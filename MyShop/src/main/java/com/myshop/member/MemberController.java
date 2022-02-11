@@ -1,5 +1,7 @@
 package com.myshop.member;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -52,6 +54,7 @@ public class MemberController {
 		session.removeAttribute("level");
 		session.removeAttribute("point");
 		session.removeAttribute("type");
+		session.removeAttribute("bList");
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -82,7 +85,7 @@ public class MemberController {
 	public String pwdPop() {
 		return "/member/pwdPopup";
 	}
-	
+
 	@PostMapping("/member/pwdUpdate")
 	@ResponseBody
 	public int editPwd(HttpServletRequest request, @RequestParam String pPwd, @RequestParam String member_pwd) {
@@ -97,7 +100,7 @@ public class MemberController {
 		}
 		return 0;
 	}
-	
+
 	@GetMapping("/member/infoSearch")
 	public String infoSearch() {
 		return "/member/infoSearch";
@@ -109,17 +112,17 @@ public class MemberController {
 		String id = service.getMemByPhone(member_phone);
 		return id;
 	}
-	
+
 	@PostMapping("/member/pwdSearch")
 	@ResponseBody
 	public String pwdSearch(@RequestParam String member_id, @RequestParam String member_phone) {
 		Member m = service.getMemById(member_id);
-		if(m != null && m.getMember_phone().equals(member_phone)) {
+		if (m != null && m.getMember_phone().equals(member_phone)) {
 			return m.getMember_pwd();
 		}
 		return null;
 	}
-	
+
 	@GetMapping("/member/join")
 	public String goJoin(Member m) {
 		return "/member/join";
@@ -173,6 +176,12 @@ public class MemberController {
 		return mv;
 	}
 
-	
-	
+	@GetMapping("/member/myBasket") // 마이페이지 정보
+	public ModelAndView myBakset(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("member/myBasket");
+		HttpSession session = request.getSession(false);
+		ArrayList list = (ArrayList)session.getAttribute("bList");
+		mv.addObject("list", list);
+		return mv;
+	}
 }

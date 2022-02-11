@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>orderList - 주문 내역</title>
 </head>
 <body>
 

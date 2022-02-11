@@ -10,7 +10,7 @@
 <c:import url="../head.jsp"></c:import>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/mLogin.js"></script>
+<script src="/resources/js/mJoin.js"></script>
 </head>
 <body>
 	<c:import url="../header.jsp" />

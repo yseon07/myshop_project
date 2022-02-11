@@ -16,16 +16,27 @@
 		$(".circle").click(function() {
 			var id = '${sessionScope.id}';
 			if (id != null && id != "") {
+				var num = $(this).attr('data-num');
+				var ob = $(this).children("i");
+				
 				if ($(this).attr("id") == "cBtn") {
-					var an = confirm("장바구니에 넣으시겠습니까?");
-					if (an) {
-						$(this).children("i").removeClass("bi-cart-plus");
-						$(this).children("i").addClass("bi-cart-plus-fill");
-						alert("장바구니에 등록되었습니다.");
+					if($(this).children("i").hasClass("bi-cart-plus-fill")) {
+						alert("이미 장바구니에 들어 있습니다.");
+					} else {
+						var an = confirm("장바구니에 넣으시겠습니까?");
+						if (an) {
+							$.ajax({			
+								url: "/addBasket?b_num=" + num,
+								method: 'get',
+								success: function(data) {					
+								}
+							});						
+							$(this).children("i").removeClass("bi-cart-plus");
+							$(this).children("i").addClass("bi-cart-plus-fill");
+							alert("장바구니에 등록되었습니다.");			
+						}
 					}
 				} else {
-					var num = $(this).attr('data-num');
-					var ob = $(this).children("i");
 					$.ajax({
 						url : "/like/" + num,
 						data : {
@@ -80,7 +91,7 @@
 											</c:otherwise>
 										</c:choose>
 										<div class="likeList">
-											<div id="cBtn" class="circle">
+											<div id="cBtn" class="circle" data-num="${p.num }">
 												<i class="bi bi-cart-plus"></i>
 											</div>
 											<div id="lBtn" class="circle" data-num="${p.num }">

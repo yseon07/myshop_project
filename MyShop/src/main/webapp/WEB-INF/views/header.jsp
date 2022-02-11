@@ -22,6 +22,7 @@
 .h-div {
 	background-color: black;
 	color: white;
+	font-size: 13px;
 }
 /* .h-div { background-color: #D9E5FF } */
 .h-div>.row {
@@ -43,6 +44,10 @@
 
 #drMenu {
 	cursor: pointer;
+	text-decoration: none;
+}
+
+#basketA {
 	text-decoration: none;
 }
 </style>
@@ -89,9 +94,12 @@
 									onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
 							</c:when>
 							<c:otherwise>
-								<span style="cursor: pointer"> <i
-									class="bi bi-cart-check-fill"></i> 장바구니
-								</span>
+
+								<span><a id="basketA" class="text-reset"
+									href="${pageContext.request.contextPath }/member/myBasket">
+										<i class="bi bi-cart-check-fill"></i> 장바구니
+								</a></span>
+								
 								|
 								<a id="drMenu" class="myMenu text-reset">${sessionScope.nick }님[${sessionScope.point }P
 									/ <c:choose>

@@ -49,6 +49,19 @@ function loginCheck() {
 											+ n2 + "&fname=" + n1);
 						});
 				
+				$("#pBasket").click(function() {
+					var an = confirm("장바구니에 넣으시겠습니까?");
+					if (an) {
+						$.ajax({			
+							url: "/addBasket?b_num=${p.num}",
+							method: 'get',
+							success: function(data) {					
+							}
+						});						
+						alert("장바구니에 등록되었습니다.");			
+					}
+				});
+			
 				$("#pLike").click(function() {
 					if(loginCheck()) {
 						$.ajax({
@@ -169,7 +182,7 @@ function loginCheck() {
 								<i id="vpBtn1" class="mx-1 bi bi-gift"></i>찜하기
 							</button>
 							<button type="button" style="width: 32%"
-								class="btn btn-outline-dark my-2">
+								class="btn btn-outline-dark my-2" id="pBasket">
 								<i id="vpBtn2" class="mx-1 bi bi-cart-plus"></i>장바구니
 							</button>
 							<button type="button" style="width: 32%"

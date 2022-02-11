@@ -28,10 +28,6 @@ function allCheck() {
 		} else if (!cBirty) {
 			alert("생일을 선택해주세요.");
 		} else {
-			alert(cId);
-			alert(cPwd);
-			alert(cNick);
-			alert(cTel);
 			alert("양식에 맞게 입력해주세요.")
 		}
 		return false;

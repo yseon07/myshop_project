@@ -12,7 +12,10 @@
 	<insert id="insert" parameterType="com.myshop.like.Like">
 		insert into my_like values(seq_my_like.nextval, #{p_num}, #{mem_id})
 	</insert>
-	<select id="selectById" parameterType="com.myshop.like.Like" resultType="int">
+	<select id="selectById" parameterType="com.myshop.like.Like" resultType="com.myshop.like.Like">
+		select * from my_like where mem_id = #{mem_id}
+	</select>
+	<select id="selectCountById" parameterType="com.myshop.like.Like" resultType="int">
 		select count(*) from my_like where p_num = #{p_num} and mem_id = #{mem_id}
 	</select>
 	<select id="selectCount" parameterType="int" resultType="int">

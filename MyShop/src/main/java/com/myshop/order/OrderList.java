@@ -2,6 +2,8 @@ package com.myshop.order;
 
 import java.util.Date;
 
+import com.myshop.product.Product;
+
 public class OrderList {
 	private int num;
 	private int p_num;
@@ -13,9 +15,14 @@ public class OrderList {
 	private String send_address;
 	private String send_memo;
 	private int mem_point;
+	private Product product;
+
+	public OrderList() {
+		super();
+	}
 
 	public OrderList(int num, int p_num, String mem_id, int quantity, int price, Date order_date, String mem_code,
-			String send_address, String send_memo, int mem_point) {
+			String send_address, String send_memo, int mem_point, Product product) {
 		super();
 		this.num = num;
 		this.p_num = p_num;
@@ -27,6 +34,7 @@ public class OrderList {
 		this.send_address = send_address;
 		this.send_memo = send_memo;
 		this.mem_point = mem_point;
+		this.product = product;
 	}
 
 	public int getNum() {
@@ -53,11 +61,11 @@ public class OrderList {
 		this.mem_id = mem_id;
 	}
 
-	public int getquantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setquantity(int quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
@@ -109,10 +117,19 @@ public class OrderList {
 		this.mem_point = mem_point;
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderList [num=" + num + ", p_num=" + p_num + ", mem_id=" + mem_id + ", quantity=" + quantity
 				+ ", price=" + price + ", order_date=" + order_date + ", mem_code=" + mem_code + ", send_address="
-				+ send_address + ", send_memo=" + send_memo + ", mem_point=" + mem_point + "]";
+				+ send_address + ", send_memo=" + send_memo + ", mem_point=" + mem_point + ", product=" + product + "]";
 	}
+
 }

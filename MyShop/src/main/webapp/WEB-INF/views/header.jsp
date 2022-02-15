@@ -121,6 +121,16 @@
 									<br>
 									<button type="button"
 										class="myMenu btn btn-sm btn-outline-black"
+										onclick="location.href='${pageContext.request.contextPath}/member/like'">
+										찜 목록</button>
+									<br>
+									<button type="button"
+										class="myMenu btn btn-sm btn-outline-black"
+										onclick="location.href='${pageContext.request.contextPath}/order/list'">
+										구매 내역</button>
+									<br>
+									<button type="button"
+										class="myMenu btn btn-sm btn-outline-black"
 										onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</button>
 								</div>
 								<!-- toggle -->

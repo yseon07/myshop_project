@@ -1,5 +1,7 @@
 package com.myshop.like;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class LikeController {
 		return service.getCount(pNum);
 	}
 
-	@PostMapping("/{pNum}/mem")
+	@PostMapping("/{pNum}/mem") // 찜 목록의 존재 여부
 	@ResponseBody
 	public int getProductLike(@RequestParam(value = "p_num") int pNum, @RequestParam(value = "mem_id") String memId) {
 		Like l = new Like();
@@ -29,7 +31,7 @@ public class LikeController {
 		return service.getLike(l); // 1이면 존재, 0이면 없음
 	}
 
-	@PostMapping("/{pNum}")
+	@PostMapping("/{pNum}") // 이미 찜에 있으면 삭제, 없으면 추가
 	@ResponseBody
 	public int setLike(@RequestParam(value = "p_num") int pNum, @RequestParam(value = "mem_id") String memId) {
 		Like l = new Like();
@@ -43,12 +45,4 @@ public class LikeController {
 			return 1;
 		}
 	}
-
-	/*
-	 * @PostMapping("/{pNum}/del")
-	 * 
-	 * @ResponseBody public void delLike(@RequestParam(value = "p_num") int
-	 * pNum, @RequestParam(value = "mem_id") String memId) { Like l = new Like();
-	 * l.setP_num(pNum); l.setMem_id(memId); service.delLike(l); }
-	 */
 }

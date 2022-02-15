@@ -8,18 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	function checkAnswer() {
-		/* let cn = $(this).attr("");
-		alert(cn);
-		
-		let c = $("#adA" + cn).val();
-		
-		
+	function checkAnswer(num) {
+		var c = $("#adA" + num).val();
 		if (c != null && c.trim() != "") {
-			return ;
+			return true;
 		} else {
 			alert("답변을 작성하세요.");
-		} */
+			return false;
+		}
 	}
 
 	$(function() {
@@ -56,8 +52,7 @@
 								method="post">
 								<textarea id="adA${q.num}" rows="5" class="w-100 form-control"
 									style="resize: none" name="content"></textarea>
-								<button data-num="${q.num}" type="button" class="btn btn-dark" onclick="checkAnswer()">작성</button>
-
+								<button type="submit" class="btn btn-dark" onclick="return checkAnswer(${q.num})">작성</button>
 								<input type="hidden" name="p_num" value="${q.p_num }"> <input
 									type="hidden" name="top_question" value="${q.num }"> <input
 									type="hidden" name="qna_type" value="1"> <input
@@ -71,7 +66,7 @@
 							</c:if>
 						</center>
 					</c:if>
-					<c:if test="${q.qna_type == 1}">
+					<%-- <c:if test="${q.qna_type == 1}">
 						<div class="px-5 card border-0" style="width: 100%;">
 							<div class="card-body">
 								<h4>
@@ -92,7 +87,7 @@
 								<hr style="margin: 0; width: 95%">
 							</c:if>
 						</center>
-					</c:if>
+					</c:if> --%>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>

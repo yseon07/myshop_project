@@ -1,5 +1,6 @@
 package com.myshop.member;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myshop.like.Like;
+import com.myshop.like.LikeService;
+import com.myshop.product.Product;
+import com.myshop.product.ProductService;
+
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService service;
+	@Autowired
+	LikeService lService;
+	@Autowired
+	ProductService pService;
 
 	@RequestMapping("/")
 	public String index() {
@@ -176,11 +186,11 @@ public class MemberController {
 		return mv;
 	}
 
-	@GetMapping("/member/myBasket") // 마이페이지 정보
+	@GetMapping("/member/myBasket") // 내 장바구니
 	public ModelAndView myBakset(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("member/myBasket");
 		HttpSession session = request.getSession(false);
-		ArrayList list = (ArrayList)session.getAttribute("bList");
+		ArrayList list = (ArrayList) session.getAttribute("bList");
 		mv.addObject("list", list);
 		return mv;
 	}

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,56 +14,60 @@
 <script src="/resources/js/pList.js"></script>
 <script>
 	$(function() {
-		$(".circle").click(function() {
-			var id = '${sessionScope.id}';
-			if (id != null && id != "") {
-				var num = $(this).attr('data-num');
-				var ob = $(this).children("i");
-				
-				if ($(this).attr("id") == "cBtn") {
-					if($(this).children("i").hasClass("bi-cart-plus-fill")) {
-						alert("이미 장바구니에 들어 있습니다.");
-					} else {
-						var an = confirm("장바구니에 넣으시겠습니까?");
-						if (an) {
-							$.ajax({			
-								url: "/addBasket?b_num=" + num,
-								method: 'get',
-								success: function(data) {					
+		$(".circle").click(
+				function() {
+					var id = '${sessionScope.id}';
+					if (id != null && id != "") {
+						var num = $(this).attr('data-num');
+						var ob = $(this).children("i");
+
+						if ($(this).attr("id") == "cBtn") {
+							if ($(this).children("i").hasClass(
+									"bi-cart-plus-fill")) {
+								alert("이미 장바구니에 들어 있습니다.");
+							} else {
+								var an = confirm("장바구니에 넣으시겠습니까?");
+								if (an) {
+									$.ajax({
+										url : "/addBasket?b_num=" + num,
+										method : 'get',
+										success : function(data) {
+										}
+									});
+									$(this).children("i").removeClass(
+											"bi-cart-plus");
+									$(this).children("i").addClass(
+											"bi-cart-plus-fill");
+									alert("장바구니에 등록되었습니다.");
 								}
-							});						
-							$(this).children("i").removeClass("bi-cart-plus");
-							$(this).children("i").addClass("bi-cart-plus-fill");
-							alert("장바구니에 등록되었습니다.");			
+							}
+						} else {
+							$.ajax({
+								url : "/like/" + num,
+								data : {
+									p_num : num,
+									mem_id : id
+								},
+								method : 'post',
+								success : function(data) {
+									if (data == 1) {
+										ob.removeClass("bi-heart");
+										ob.addClass("bi-heart-fill");
+									} else {
+										ob.removeClass("bi-heart-fill");
+										ob.addClass("bi-heart");
+									}
+								}
+							});
+						}
+					} else {
+						var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
+						if (an == true) {
+							location.href = "/member/login";
 						}
 					}
-				} else {
-					$.ajax({
-						url : "/like/" + num,
-						data : {
-							p_num : num,
-							mem_id : id
-						},
-						method : 'post',
-						success : function(data) {
-							if (data == 1) {
-								ob.removeClass("bi-heart");
-								ob.addClass("bi-heart-fill");
-							} else {
-								ob.removeClass("bi-heart-fill");
-								ob.addClass("bi-heart");
-							}
-						}
-					});
-				}
-			} else {
-				var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
-				if (an == true) {
-					location.href = "/member/login";
-				}
-			}
-			event.stopPropagation();
-		});
+					event.stopPropagation();
+				});
 	});
 </script>
 </head>
@@ -103,19 +108,19 @@
 												</c:if>
 											</div>
 										</div>
-										<%-- <c:forEach items="${p.files }" var="f"> 이미지 전체 출력
-												<img width="200" height="200"
-													src="${pageContext.request.contextPath }/img?num=${p.num}&fname=${f}">
-											</c:forEach> --%>
 									</div>
 									<div>
 										<c:if test="${p.discount == 0 }">
-											<b>${p.product_price }</b>원
-									</c:if>
+											<b><fmt:formatNumber value="${p.product_price }"
+													pattern="#,###" /></b>원
+										</c:if>
 										<c:if test="${p.discount != 0 }">
-											<b>${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}</b>원
-									</c:if>
-										<br> ${p.product_title }<br> 리뷰 ${p.reviewCount}개
+											<b><fmt:formatNumber
+													value="${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}"
+													pattern="#,###" /></b>원
+										</c:if>
+										<br> ${p.product_title }<br>
+										<%-- 리뷰 ${p.reviewCount}개 --%>
 									</div>
 								</li>
 							</c:forEach>

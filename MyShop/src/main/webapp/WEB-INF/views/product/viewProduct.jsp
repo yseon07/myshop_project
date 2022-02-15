@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,7 +160,7 @@ function loginCheck() {
 						<div class="priceDiv row my-2" style="font-size: 20px">
 							<div class="col-6">
 								<c:if test="${p.discount != 0 }">
-									<span>${p.discount }%</span>
+									<span style="font-size: 13px">${p.discount }% 할인중</span>
 								</c:if>
 							</div>
 							<div style="display: inline-block; text-align: right"
@@ -169,8 +170,11 @@ function loginCheck() {
 										<b>${p.product_price }</b>원
 								</c:when>
 									<c:otherwise>
-										<small style="color: gray"><b><strike>${p.product_price }원</strike></b></small>
-										<b>${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}</b>원
+										<small style="color: gray"><b><strike><fmt:formatNumber
+														value="${p.product_price }" pattern="#,###" />원</strike></b></small>
+										<b><fmt:formatNumber
+												value="${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}"
+												pattern="#,###" /></b>원
 								</c:otherwise>
 								</c:choose>
 							</div>

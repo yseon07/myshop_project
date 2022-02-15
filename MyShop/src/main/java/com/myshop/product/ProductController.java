@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.like.Like;
 import com.myshop.like.LikeService;
+import com.myshop.order.OrderList;
+import com.myshop.order.OrderListService;
 import com.myshop.review.ReviewService;
 
 @Controller
@@ -36,6 +38,8 @@ public class ProductController {
 	private ReviewService rService;
 	@Autowired
 	private LikeService lService;
+	@Autowired
+	private OrderListService oService;
 
 	@GetMapping("/product")
 	public ModelAndView allList(HttpServletRequest request) {
@@ -163,14 +167,52 @@ public class ProductController {
 	@RequestMapping("/addBasket")
 	public void addBakset(HttpServletRequest request, int b_num) {
 		HttpSession session = request.getSession(false);
-		ArrayList<Product> list = new ArrayList<Product>();
+		ArrayList<OrderList> list = new ArrayList<OrderList>();
 		if (session.getAttribute("bList") != null) {
-			list = (ArrayList<Product>) session.getAttribute("bList");
+			list = (ArrayList<OrderList>) session.getAttribute("bList");
 		}
 		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
 		Product p = getFiles(path, b_num);
-		list.add(p);
+		OrderList o = new OrderList();
+		o.setP_num(p.getNum());
+		o.setPrice(p.getProduct_price());
+		o.setProduct(p);
+		o.setQuantity(1);
+		o.setMem_id((String) session.getAttribute("id"));
+		list.add(o);
 		session.removeAttribute("bList");
 		session.setAttribute("bList", list);
+	}
+
+	@GetMapping("/member/like") // 찜 목록
+	public ModelAndView myLike(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("member/likeList");
+		HttpSession session = request.getSession(false);
+		Like l = new Like();
+		l.setMem_id((String) session.getAttribute("id"));
+		ArrayList<Like> list = lService.getLikeList(l);
+		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
+		for (int i = 0; i < list.size(); i++) {
+			Like sLi = list.get(i);
+			Product p = getFiles(path, sLi.getP_num());
+			sLi.setP(p);
+		}
+		mv.addObject("list", list);
+		return mv;
+	}
+
+	@GetMapping("/order/list") // 구매 목록
+	public ModelAndView myOrderList(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("order/orderList");
+		HttpSession session = request.getSession(false);
+		ArrayList<OrderList> list = (ArrayList<OrderList>)oService.getListByMem((String)session.getAttribute("id"));
+		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
+		for (int i = 0; i < list.size(); i++) {
+			OrderList oLi = list.get(i);
+			Product p = getFiles(path, oLi.getP_num());
+			oLi.setProduct(p);
+		}
+		mv.addObject("list", list);
+		return mv;
 	}
 }

@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>myshop-myBasket</title>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <c:import url="../head.jsp"></c:import>
-<!-- <script src="/resources/js/m.js"></script> -->
+<script src="/resources/js/mBasket.js"></script>
 <style>
 td {
 	vertical-align: middle;
@@ -23,39 +23,52 @@ td {
 <body>
 	<c:import url="../header.jsp" />
 	<div class="mainDiv align-items-center"
-		style="padding: 0 5% 0 5%; margin-top: 10%">
+		style="padding: 0 5% 0 5%; margin-top: 7%">
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-6 table-responsive" style="text-align: center">
-				<h5>장바구니</h5>
-				<table class="table border">
-					<c:forEach items="${list }" var="p">
-						<tr>
-							<td style="width: 25%"><c:choose>
-									<c:when test="${not empty p.files }">
-										<img id="imgs${p.num }" width="70" height="70"
-											src="${pageContext.request.contextPath }/img?num=${p.num}&fname=${p.files[0]}">
-									</c:when>
-									<c:otherwise>
-										<img id="imgs${p.num }" width="70" height="70"
-											src="${pageContext.request.contextPath }/img?num=0&fname=no_img.jpg">
-									</c:otherwise>
-								</c:choose></td>
-							<td><a class="text-reset"
-								href="${pageContext.request.contextPath }/product/${p.num}">${p.product_title }</a></td>
+				<c:choose>
+					<c:when test="${not empty list }">
+						<h5>장바구니</h5>
+						<br>
+						<form method="post" action="${pageContext.request.contextPath }/order">
+							<table class="table border">
+								<c:forEach items="${list }" var="o" varStatus="status1">
+									<tr>
+										<td style="width: 25%"><c:choose>
+												<c:when test="${not empty o.product.files }">
+													<img id="imgs${o.product.num }" width="70" height="70"
+														src="${pageContext.request.contextPath }/img?num=${o.product.num}&fname=${o.product.files[0]}">
+												</c:when>
+												<c:otherwise>
+													<img id="imgs${o.product.num }" width="70" height="70"
+														src="${pageContext.request.contextPath }/img?num=0&fname=no_img.jpg">
+												</c:otherwise>
+											</c:choose></td>
+										<td><a class="text-reset"
+											href="${pageContext.request.contextPath }/product/${o.product.num}">${o.product.product_title }</a></td>
 
-							<td style="width: 30%; padding-left: 0px">${p.product_price }원
-								* <input type="number" class="form-control"
-								style="text-align: center ; width: 70px ; display: inline-block" value="1">
-							</td>
-							<td style="width: 5% ; font-size: 30px"><i class="bi bi-x"></i></td>
-						</tr>
-					</c:forEach>
-					<tr>
-						<td colspan="4"><button type="button"
-								class="btn btn-dark w-100">구매</button></td>
-					</tr>
-				</table>
+										<td style="width: 20%; padding-left: 0px"><span
+											id="priceText${status1.index }"
+											data-defaultPrice="${o.product.product_price }">${o.product.product_price }</span>원</td>
+										<td><input type="number" onkeyPress="checkNum()"
+											class="form-control quan" id="${status1.index }"
+											style="text-align: center; width: 70px; display: inline-block"
+											value="1"></td>
+										<td style="width: 5%; font-size: 30px"><i class="bi bi-x"></i></td>
+									</tr>
+								</c:forEach>
+								<tr>
+									<td colspan="5"><button type="submit"
+											class="btn btn-dark w-100">구매</button></td>
+								</tr>
+							</table>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<h5>장바구니에 담은 물품이 없습니다.</h5>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="col-md-3"></div>
 		</div>

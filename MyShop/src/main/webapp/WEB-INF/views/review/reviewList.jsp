@@ -15,7 +15,7 @@
 					<div class="card border-0" style="width: 100%;">
 						<div class="card-body">
 							<h6 class="card-subtitle mb-2 text-muted">
-							<fmt:formatDate var="day" value="${r.writeDate}" pattern="YYYY.MM.DD"/>
+							<fmt:formatDate var="day" value="${r.writeDate}" pattern="yyyy.MM.dd"/>
 							${r.mem_id} | ${day }</h6>
 							<h5 class="card-title">
 								<c:forEach begin="1" end="5" varStatus="status">

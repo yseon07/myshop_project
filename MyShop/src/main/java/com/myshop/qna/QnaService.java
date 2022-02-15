@@ -18,6 +18,14 @@ public class QnaService {
 		return mapper.selectByNum(p_num);
 	}
 	
+	public ArrayList<Qna> getProductQnaTopComment(int p_num) {
+		return mapper.selectByTopComment(p_num);
+	}
+	
+	public ArrayList<Qna> getProductQnaAnswerComment(int p_num) {
+		return mapper.selectByAnswerComment(p_num);
+	}
+	
 	public void editQna(Qna q) {
 		mapper.update(q);
 	}

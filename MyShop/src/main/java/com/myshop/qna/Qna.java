@@ -2,6 +2,8 @@ package com.myshop.qna;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Qna {
 	private int num;
 	private int p_num;
@@ -9,6 +11,7 @@ public class Qna {
 	private int qna_type;
 	private int top_question;
 	private String content;
+	@JsonFormat(pattern="yyyy.MM.dd")
 	private Date writeDate;
 
 	public Qna() {

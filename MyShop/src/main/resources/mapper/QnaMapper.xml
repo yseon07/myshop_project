@@ -19,6 +19,15 @@
 		resultType="com.myshop.qna.Qna">
 		select * from my_qna where p_num = #{p_num}
 	</select>
+	<select id="selectByTopComment" parameterType="int"
+		resultType="com.myshop.qna.Qna">
+		select * from my_qna where p_num = #{p_num} and qna_type = 0
+	</select>
+	<select id="selectByAnswerComment" parameterType="int"
+		resultType="com.myshop.qna.Qna">
+		select * from my_qna where p_num = #{p_num} and qna_type = 1
+	</select>
+	
 	<update id="update" parameterType="com.myshop.qna.Qna">
 		update my_qna set content = #{content} where num = #{num} 
 	</update>

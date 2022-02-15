@@ -92,15 +92,6 @@ function loginCheck() {
 					$(this).tab("show");
 				});
 				
-				/*  $("#reviewWrite").click(function() {
-					if(loginCheck()) {
-						var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
-						window.open("/review/add?pNum=${p.num}", "비밀번호 변경", option);
-					} else {
-						alert("로그인 후 작성 가능 합니다.");
-					}
-				});  */
-				
 				 $("#qBtn").click(function() {
 				if(loginCheck()) {
 					var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
@@ -167,7 +158,8 @@ function loginCheck() {
 								class="col-6">
 								<c:choose>
 									<c:when test="${p.discount == 0 }">
-										<b>${p.product_price }</b>원
+										<b><fmt:formatNumber value="${p.product_price }"
+												pattern="#,###" /></b>원
 								</c:when>
 									<c:otherwise>
 										<small style="color: gray"><b><strike><fmt:formatNumber
@@ -218,7 +210,7 @@ function loginCheck() {
 						<c:import url="/review/list?p_num=${p.num }"></c:import>
 					</div>
 					<div class="tab-pane fade" id="q1" role="tabpanel">
-						<c:import url="/qna/list?p_num=${p.num }"></c:import>
+						<c:import url="/qna/list/top?p_num=${p.num }"></c:import>
 					</div>
 				</div>
 			</div>

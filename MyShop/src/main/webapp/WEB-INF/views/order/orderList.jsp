@@ -60,7 +60,7 @@ $(function() {
 							<td><fmt:formatNumber value="${o.price }" pattern="#,###" />원
 							</td>
 							<td><fmt:formatDate var="day" value="${o.order_date}"
-									pattern="YYYY.MM.DD h시 m분" /> ${day }</td>
+									pattern="yyyy.MM.dd hh시 m분" /> ${day }</td>
 							<td>
 								<button type="button" class="btn btn-dark reviewWrite" data-pNum="${o.product.num }">리뷰
 									작성</button>

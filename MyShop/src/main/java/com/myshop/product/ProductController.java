@@ -106,6 +106,12 @@ public class ProductController {
 	public String editProduct() {
 		return "/product/viewProduct";
 	}
+	
+	@GetMapping("/product/del")
+	public String delProduct(int pNum) {
+		service.delProduct(pNum);
+		return "redirect:/";
+	}
 
 	@RequestMapping("/img")
 	public ResponseEntity<byte[]> getImg(String fname, int num, HttpServletRequest request) {
@@ -171,6 +177,13 @@ public class ProductController {
 		if (session.getAttribute("bList") != null) {
 			list = (ArrayList<OrderList>) session.getAttribute("bList");
 		}
+		
+		for(int i = 0 ; i < list.size() ; i++) {
+			if(list.get(i).getP_num() == b_num) {
+				return ;
+			}
+		}
+		
 		String path = request.getServletContext().getRealPath("\\resources\\image") + "\\";
 		Product p = getFiles(path, b_num);
 		OrderList o = new OrderList();

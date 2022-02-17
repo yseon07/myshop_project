@@ -13,6 +13,8 @@ import com.myshop.member.Member;
 import com.myshop.member.MemberService;
 import com.myshop.product.ProductService;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 @Controller
 public class OrderListController {
 	@Autowired
@@ -27,6 +29,7 @@ public class OrderListController {
 		HttpSession session = request.getSession(false);
 		Member m = mService.getMemById((String)session.getAttribute("id")); 
 		ArrayList<OrderList> list = (ArrayList<OrderList>)session.getAttribute("bList");
+		int sumP = 0;
 		for (int i = 0; i < list.size(); i++) {
 			OrderList o = list.get(i);
 			o.setMem_code(m.getMember_zipcode());
@@ -34,9 +37,14 @@ public class OrderListController {
 			o.setMem_point(o.getPrice() * 2 / 100);
 			o.setSend_memo("blank");
 			service.addOrderList(o);
+			sumP += o.getMem_point();
 			o.getProduct().setProduct_quantity(o.getProduct().getProduct_quantity() - o.getQuantity());
 			pService.editProduct(o.getProduct());
 		}
+		m.setMember_point(m.getMember_point() + sumP);
+		session.removeAttribute("point");
+		session.setAttribute("point", m.getMember_point());
+		mService.editMemPoint(m);		
 		session.removeAttribute("bList");
 		return "/order/orderSuccess";
 	}

@@ -36,6 +36,7 @@ function loginCheck() {
 					})
 				};
 				
+				$("#nText").height($("#nText").prop('scrollHeight'));
 				
 				$("img").mouseover(
 						function() {
@@ -51,15 +52,22 @@ function loginCheck() {
 						});
 				
 				$("#pBasket").click(function() {
-					var an = confirm("장바구니에 넣으시겠습니까?");
-					if (an) {
-						$.ajax({			
-							url: "/addBasket?b_num=${p.num}",
-							method: 'get',
-							success: function(data) {					
-							}
-						});						
-						alert("장바구니에 등록되었습니다.");			
+					if(loginCheck()) {
+						var an = confirm("장바구니에 넣으시겠습니까?");
+						if (an) {
+							$.ajax({			
+								url: "/addBasket?b_num=${p.num}",
+								method: 'get',
+								success: function(data) {					
+								}
+							});						
+							alert("장바구니에 등록되었습니다.");			
+						}
+					} else {
+						var an = confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?");
+						if(an == true) {
+							location.href="/member/login";
+						}
 					}
 				});
 			
@@ -120,7 +128,7 @@ function loginCheck() {
 								<table style="text-align: center; width: 100%">
 									<tr>
 										<td colspan="5" style="padding: 0px"><img id="mainImg"
-											width="80%" height="200"
+											style="max-width: 70%; max-height: 50%; height: auto !important"
 											src="${pageContext.request.contextPath }/img?num=${p.num}&fname=${p.files[0]}">
 										</td>
 									</tr>
@@ -128,6 +136,7 @@ function loginCheck() {
 										<c:forEach items="${p.files }" var="f" varStatus="status">
 											<td class="imgListTd"><img id="${p.files[status.index]}"
 												class="${p.num }" width="40" height="40"
+												style="max-width: 200px"
 												src="${pageContext.request.contextPath }/img?num=${p.num}&fname=${p.files[status.index]}">
 											</td>
 										</c:forEach>
@@ -138,7 +147,7 @@ function loginCheck() {
 								<table>
 									<tr>
 										<td colspan="5" style="padding: 0px"><img id="mainImg"
-											width="100%" height="200"
+											width="100%" height="200" style="max-width: 200px"
 											src="${pageContext.request.contextPath }/img?num=0&fname=no_img.jpg">
 										</td>
 									</tr>
@@ -148,46 +157,57 @@ function loginCheck() {
 					</div>
 					<div id="productInfo" class="col-6">
 						<div class="my-2" style="font-size: 30px">${p.product_title }</div>
-						<div class="priceDiv row my-2" style="font-size: 20px">
-							<div class="col-6">
-								<c:if test="${p.discount != 0 }">
-									<span style="font-size: 13px">${p.discount }% 할인중</span>
-								</c:if>
-							</div>
-							<div style="display: inline-block; text-align: right"
-								class="col-6">
-								<c:choose>
-									<c:when test="${p.discount == 0 }">
-										<b><fmt:formatNumber value="${p.product_price }"
-												pattern="#,###" /></b>원
+						<c:if test="${sessionScope.type == 0 }">
+							<button type="button" class="my-5 w-100 btn btn-outline-dark"
+								onclick="location.href='${pageContext.request.contextPath}/product/del?pNum=${p.num }'">제품
+								삭제</button>
+						</c:if>
+						<c:if test="${sessionScope.type != 0 }">
+							<div class="priceDiv row my-2" style="font-size: 20px">
+								<div class="col-6">
+									<c:if test="${p.discount != 0 }">
+										<span style="font-size: 13px">${p.discount }% 할인중</span>
+									</c:if>
+								</div>
+								<div style="display: inline-block; text-align: right"
+									class="col-6">
+									<c:choose>
+										<c:when test="${p.discount == 0 }">
+											<b><fmt:formatNumber value="${p.product_price }"
+													pattern="#,###" /></b>원
 								</c:when>
-									<c:otherwise>
-										<small style="color: gray"><b><strike><fmt:formatNumber
-														value="${p.product_price }" pattern="#,###" />원</strike></b></small>
-										<b><fmt:formatNumber
-												value="${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}"
-												pattern="#,###" /></b>원
+										<c:otherwise>
+											<small style="color: gray"><b><strike><fmt:formatNumber
+															value="${p.product_price }" pattern="#,###" />원</strike></b></small>
+											<b><fmt:formatNumber
+													value="${fn:split(p.product_price - p.product_price * p.discount/100, '.')[0]}"
+													pattern="#,###" /></b>원
 								</c:otherwise>
-								</c:choose>
+									</c:choose>
+								</div>
 							</div>
-						</div>
-						<div class="btnDiv my-5 text-center">
-							<button type="button" style="width: 100%" class="btn btn-dark">구매</button>
-							<button id="pLike" type="button" style="width: 32%"
-								class="btn btn-outline-dark my-2">
-								<i id="vpBtn1" class="mx-1 bi bi-gift"></i>찜하기
-							</button>
-							<button type="button" style="width: 32%"
-								class="btn btn-outline-dark my-2" id="pBasket">
-								<i id="vpBtn2" class="mx-1 bi bi-cart-plus"></i>장바구니
-							</button>
-							<button type="button" style="width: 32%"
-								class="btn btn-outline-dark my-2" id="qBtn">
-								<i class="mx-1 bi bi-pencil-square"></i>QnA 작성
-							</button>
-						</div>
+							<div class="btnDiv my-5 text-center">
+								<button type="button" style="width: 100%" class="btn btn-dark">구매</button>
+								<button id="pLike" type="button" style="width: 32%"
+									class="btn btn-outline-dark my-2">
+									<i id="vpBtn1" class="mx-1 bi bi-gift"></i>찜하기
+								</button>
+								<button type="button" style="width: 32%"
+									class="btn btn-outline-dark my-2" id="pBasket">
+									<i id="vpBtn2" class="mx-1 bi bi-cart-plus"></i>장바구니
+								</button>
+								<button type="button" style="width: 32%"
+									class="btn btn-outline-dark my-2" id="qBtn">
+									<i class="mx-1 bi bi-pencil-square"></i>QnA 작성
+								</button>
+							</div>
+						</c:if>
 					</div>
 				</div>
+				<div class="w-100" style="height: 30%; padding: 5% 5% 0 5%">
+					<textarea id="nText"
+								readonly class="w-100 border-0"
+								style="height: 100%; overflow: hidden; resize: none">${p.product_content }</textarea>
 			</div>
 			<div class="col-2"></div>
 		</div>

@@ -1,6 +1,5 @@
 package com.myshop.member;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myshop.like.Like;
 import com.myshop.like.LikeService;
-import com.myshop.product.Product;
+import com.myshop.order.OrderList;
 import com.myshop.product.ProductService;
 
 @Controller
@@ -190,8 +188,20 @@ public class MemberController {
 	public ModelAndView myBakset(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("member/myBasket");
 		HttpSession session = request.getSession(false);
-		ArrayList list = (ArrayList) session.getAttribute("bList");
+		ArrayList<OrderList> list = (ArrayList<OrderList>) session.getAttribute("bList");
 		mv.addObject("list", list);
 		return mv;
+	}
+
+	@GetMapping("/del/basket")
+	public String delBasket(HttpServletRequest request, int pNum) {
+		HttpSession session = request.getSession(false);
+		ArrayList<OrderList> list = (ArrayList<OrderList>) session.getAttribute("bList");
+		for(int i = 0 ; i < list.size() ; i++) {
+			if(list.get(i).getP_num() == pNum) {
+				list.remove(i);
+			}
+		}
+		return "redirect:/member/myBasket";
 	}
 }

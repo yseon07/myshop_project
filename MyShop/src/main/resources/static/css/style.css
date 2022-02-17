@@ -24,14 +24,14 @@ html, body {
 }
 
 /* productList */
- #ul1 {
+#ul1 {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	text-align: center
 }
 
-#ul1 > li {
+#ul1>li {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	border: 0;
@@ -76,4 +76,11 @@ html, body {
 /* product view */
 .imgListTd {
 	cursor: pointer
+}
+
+/* 찜 목록, 장바구니, 구매 내역 */
+caption {
+	caption-side: top;
+	text-align: left;
+	font-size: 20px;
 }

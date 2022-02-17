@@ -11,21 +11,33 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="com.myshop.notice.Notice">
-		insert into my_notice values(seq_my_notice.nextval, #{notice_title}, #{notice_content}, sysdate)
+		insert into my_notice
+		values(seq_my_notice.nextval, #{notice_title}, #{notice_content},
+		sysdate)
 	</insert>
 	<select id="select" resultType="com.myshop.notice.Notice">
-		select * from my_notice order by num desc
+		select * from my_notice order by
+		num desc
 	</select>
 	<select id="selectByNum" parameterType="int"
 		resultType="com.myshop.notice.Notice">
 		select * from my_notice where num = #{num}
 	</select>
+	<select id="selectCount" resultType="int">
+		select count(*) from my_notice
+	</select>
+	<select id="listPage" parameterType="com.myshop.notice.Pagenation" resultType="com.myshop.notice.Notice">
+		select * from (select row_number() over (order by num) rNum, num, notice_title, notice_content, write_date from my_notice order by num desc) where rNum between #{rStart} and #{rEnd}
+	</select>
 	<update id="update" parameterType="com.myshop.notice.Notice">
-		update my_notice set notice_title = #{notice_title}, notice_content =
-		#{notice_content} where num = #{num}
+		update my_notice set
+		notice_title = #{notice_title}, notice_content =
+		#{notice_content}
+		where num = #{num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_notice where num =
+		delete from my_notice where
+		num =
 		#{num}
 	</delete>
 </mapper>

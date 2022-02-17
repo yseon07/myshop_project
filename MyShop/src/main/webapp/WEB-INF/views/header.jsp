@@ -47,7 +47,7 @@
 	text-decoration: none;
 }
 
-#basketA {
+#basketA, .hList {
 	text-decoration: none;
 }
 </style>
@@ -66,7 +66,7 @@
 </script>
 </head>
 <body>
-	<div class="w-100 container-fluid h-div py-1 px-2 mb-3">
+	<div class="w-100 container-fluid h-div py-1 px-2">
 		<div class="row w-100 align-items-center">
 			<div class="h-c1 col-sm-4"></div>
 			<div class="h-c2 col-sm-4">
@@ -139,6 +139,19 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+		</div>
+	</div>
+	<div
+		class="w-100 justify-content-center align-items-center border-top border-bottom py-3 my-2">
+		<div style="text-align: center; color: gray; height: 20px">
+			<span class="mx-2"><a class="hList text-reset"
+				href="${pageContext.request.contextPath }/">전체 상품</a></span> <span
+				class="mx-2"><a class="hList text-reset"
+				href="${pageContext.request.contextPath }/notice">공지사항</a></span>
+<%-- 			<c:if test="${sessionScope.type == 0 }">
+				<span class="mx-2"><a class="hList text-reset"
+					href="${pageContext.request.contextPath }/product/List">제품 관리</a></span>
+			</c:if> --%>
 		</div>
 	</div>
 </body>

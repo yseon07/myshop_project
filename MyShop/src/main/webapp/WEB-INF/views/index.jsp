@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Myshop-Main</title>
 </head>
 <body>
 	<c:import url="header.jsp" />

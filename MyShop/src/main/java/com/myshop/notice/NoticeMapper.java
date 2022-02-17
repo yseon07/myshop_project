@@ -1,6 +1,7 @@
 package com.myshop.notice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +12,10 @@ public interface NoticeMapper {
 	ArrayList<Notice> select();
 
 	Notice selectByNum(int num);
+
+	int selectCount();
+
+	List<Notice> listPage(Pagenation p);
 
 	void update(Notice n);
 

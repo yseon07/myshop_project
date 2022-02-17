@@ -17,23 +17,30 @@ td {
 }
 </style>
 <script>
-$(function() {
-	$(".reviewWrite").click(function() {
-		var pNum = $(this).attr("data-pNum");		
-		var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
-		window.open("/review/add?pNum=" + pNum, "비밀번호 변경", option);
-	});
-})
+	$(function() {
+		$(".reviewWrite")
+				.click(
+						function() {
+							var pNum = $(this).attr("data-pNum");
+							var option = "width = 700, height = 400, top = 100, left = 200, scrollbars = no, location = no, toolbars = no, status = no";
+							window.open("/review/add?pNum=" + pNum, "비밀번호 변경",
+									option);
+						});
+	})
 </script>
 </head>
 <body>
 	<c:import url="../header.jsp" />
 	<div class="mainDiv align-items-center"
-		style="padding: 0 5% 0 5%; margin-top: 5%">
+		style="padding: 0 5% 0 5%; margin-top: 2%">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<table class="table border">
+					<caption>
+						<b>구매내역</b>
+						<hr style="margin: 3px; height: 3px; background-color: black">
+					</caption>
 					<tr style="text-align: center">
 						<th></th>
 						<th></th>
@@ -62,8 +69,8 @@ $(function() {
 							<td><fmt:formatDate var="day" value="${o.order_date}"
 									pattern="yyyy.MM.dd hh시 m분" /> ${day }</td>
 							<td>
-								<button type="button" class="btn btn-dark reviewWrite" data-pNum="${o.product.num }">리뷰
-									작성</button>
+								<button type="button" class="btn btn-dark reviewWrite"
+									data-pNum="${o.product.num }">리뷰 작성</button>
 							</td>
 						</tr>
 					</c:forEach>

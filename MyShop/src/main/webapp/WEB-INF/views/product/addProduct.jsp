@@ -22,7 +22,7 @@
 					onsubmit="return fileCheck()">
 					<table class="table">
 						<tr>
-							<td class="align-middle">제목</td>
+							<td class="align-middle" style="width: 30%">제목</td>
 							<td><input type="text" name="product_title"
 								placeholder="25글자 이내" required class="form-control"></td>
 						</tr>

@@ -29,24 +29,28 @@ td {
 			<div class="col-md-6 table-responsive" style="text-align: center">
 				<c:choose>
 					<c:when test="${not empty list }">
-						<h5>장바구니</h5>
 						<br>
-						<form method="post" action="${pageContext.request.contextPath }/order">
-							<table class="table border">
+						<form method="post"
+							action="${pageContext.request.contextPath }/order">
+							<table class="table">
+								<caption>
+									<b>장바구니</b>
+									<hr style="margin: 3px; height: 3px ; background-color: black">
+								</caption>
 								<c:forEach items="${list }" var="o" varStatus="status1">
 									<tr>
 										<td style="width: 25%"><c:choose>
 												<c:when test="${not empty o.product.files }">
-													<img id="imgs${o.product.num }" width="70" height="70"
-														src="${pageContext.request.contextPath }/img?num=${o.product.num}&fname=${o.product.files[0]}">
+													<img id="imgs${o.p_num }" width="70" height="70"
+														src="${pageContext.request.contextPath }/img?num=${o.p_num}&fname=${o.product.files[0]}">
 												</c:when>
 												<c:otherwise>
-													<img id="imgs${o.product.num }" width="70" height="70"
+													<img id="imgs${o.p_num }" width="70" height="70"
 														src="${pageContext.request.contextPath }/img?num=0&fname=no_img.jpg">
 												</c:otherwise>
 											</c:choose></td>
 										<td><a class="text-reset"
-											href="${pageContext.request.contextPath }/product/${o.product.num}">${o.product.product_title }</a></td>
+											href="${pageContext.request.contextPath }/product/${o.p_num}">${o.product.product_title }</a></td>
 
 										<td style="width: 20%; padding-left: 0px"><span
 											id="priceText${status1.index }"
@@ -55,7 +59,10 @@ td {
 											class="form-control quan" id="${status1.index }"
 											style="text-align: center; width: 70px; display: inline-block"
 											value="1"></td>
-										<td style="width: 5%; font-size: 30px"><i class="bi bi-x"></i></td>
+										<td style="width: 5%; font-size: 30px"><a
+											class="text-reset"
+											href="${pageContext.request.contextPath }/del/basket?pNum=${o.p_num}"><i
+												class="bi bi-x"></i></a></td>
 									</tr>
 								</c:forEach>
 								<tr>

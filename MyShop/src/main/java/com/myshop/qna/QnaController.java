@@ -49,7 +49,6 @@ public class QnaController {
 
 	@PostMapping("/add")
 	public String addQna2(Qna q, HttpServletRequest request) {
-		System.out.println(q.toString());
 		if (q.getTop_question() > 0) {
 			request.setAttribute("result", 1);
 		} else {

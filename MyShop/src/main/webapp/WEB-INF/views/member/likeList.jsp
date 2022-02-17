@@ -23,7 +23,11 @@ td {
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
-				<table class="table border">
+				<table class="table ">
+					<caption>
+						<b>찜 목록</b>
+						<hr style="margin: 3px; height: 3px; background-color: black">
+					</caption>
 					<c:forEach items="${list }" var="l">
 						<tr>
 							<td style="width: 25%"><c:choose>
@@ -43,7 +47,9 @@ td {
 								id="priceText${status1.index }"
 								data-defaultPrice="${l.p.product_price }">${l.p.product_price }</span>원</td>
 
-							<td style="width: 5%; font-size: 30px"><i class="bi bi-x"></i></td>
+							<td style="width: 5%; font-size: 30px"><a class="text-reset"
+								href="${pageContext.request.contextPath }/like/del/${l.p.num}"><i
+									class="bi bi-x"></i></a></td>
 						</tr>
 					</c:forEach>
 				</table>

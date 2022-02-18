@@ -16,3 +16,4 @@
 HTML, CSS, JavaScript, jQuery, Bootstrap
 # back-end
 spring boot, MyBatis
+![db](https://user-images.githubusercontent.com/42922919/154598247-3d482773-9282-405d-a8c7-bc5f6dff5cd3.png)

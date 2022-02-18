@@ -1,10 +1,10 @@
 # MyShop_project
 쇼핑몰 기능 구현(관리자 / 사용자=구매자)
 
-### 사용기술
-# front-end
+# 사용기술
+### front-end
 HTML, CSS, JavaScript, jQuery, Bootstrap
-# back-end
+### back-end
 spring boot, MyBatis
 
 ### 관리자

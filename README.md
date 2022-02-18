@@ -1,7 +1,11 @@
 # MyShop_project
-쇼핑몰 기능 구현
-관리자 / 사용자
+쇼핑몰 기능 구현(관리자 / 사용자=구매자)
 
+### 사용기술
+# front-end
+HTML, CSS, JavaScript, jQuery, Bootstrap
+# back-end
+spring boot, MyBatis
 
 ### 관리자
 상품 등록, 삭제 / 카테고리 등록 / 공지사항 등록 / QNA 답변 등록
@@ -10,9 +14,3 @@
 
 ### DB - Oracle
 ![db](https://user-images.githubusercontent.com/42922919/154598247-3d482773-9282-405d-a8c7-bc5f6dff5cd3.png)
-
-### 사용기술
-# front-end
-HTML, CSS, JavaScript, jQuery, Bootstrap
-# back-end
-spring boot, MyBatis
